@@ -11,7 +11,7 @@ import java.util.stream.Stream;
 
 public class Metodos {
     public List<Person> leerFichero() throws IOException, InvalidLineFormatException {
-        String nombreFichero = "people.csv";
+        String nombreFichero = "ejercicio_1.1/people.csv";
         FileReader fr = new FileReader(nombreFichero);
         BufferedReader br = new BufferedReader(fr);
 
