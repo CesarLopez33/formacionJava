@@ -1,5 +1,6 @@
 package ejercicios;
 
+
 import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
@@ -11,7 +12,7 @@ import java.util.stream.Stream;
 
 public class Metodos {
     public List<Person> leerFichero() throws IOException, InvalidLineFormatException {
-        String nombreFichero = "ejercicio_1.1/people.csv";
+        String nombreFichero = "people.csv";
         FileReader fr = new FileReader(nombreFichero);
         BufferedReader br = new BufferedReader(fr);
 
