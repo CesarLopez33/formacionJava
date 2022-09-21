@@ -39,11 +39,7 @@ public class PersonaServiceImple implements PersonaService{
 
     @Override
     public Persona obtenerPersonaPorNombre(String nombre) throws FileNotFoundException{
-        for(Persona p: personaRepository.findAll()) {
-            if (p.getNombre().equals(nombre))
-                return p;
-        }
-        throw new FileNotFoundException("Persona no encontrada");
+        return personaRepository.findFirstByNombre(nombre).orElseThrow(()->new FileNotFoundException("Persona no encontrada"));
     }
 
     @Override
