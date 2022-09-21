@@ -16,7 +16,7 @@ public class CrearPersona {
     PersonaService ps;
 
     @PostMapping()
-    void crearPersona(@RequestBody Persona p){
+    void crearPersona(@RequestBody Persona p) {
         ps.crearPersona(p);
     }
 }

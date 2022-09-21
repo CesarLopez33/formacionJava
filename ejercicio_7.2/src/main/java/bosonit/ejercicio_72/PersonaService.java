@@ -1,15 +1,14 @@
 package bosonit.ejercicio_72;
 
-
-import java.io.FileNotFoundException;
+import bosonit.ejercicio_72.exceptions.UnprocessableEntityException;
 import java.util.List;
 
 public interface PersonaService {
 
     void crearPersona(Persona persona);
     Persona actualizarPersona(Integer id,Persona persona);
-    Persona obtenerPersona(Integer id) throws FileNotFoundException;
     void eliminarPersona(Integer id);
+    Persona obtenerPersona(Integer id);
+    Persona obtenerPersonaPorNombre(String nombre);
     List<Persona> obtenerTodasPersonas();
-    Persona obtenerPersonaPorNombre(String nombre) throws FileNotFoundException;
 }

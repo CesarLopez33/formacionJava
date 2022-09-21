@@ -5,7 +5,6 @@ import bosonit.ejercicio_72.PersonaService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
-import java.io.FileNotFoundException;
 import java.util.List;
 
 @RestController
@@ -16,11 +15,11 @@ public class ObtenerPersona {
     PersonaService ps;
 
     @GetMapping("/{id}")
-    Persona obtenerPersona(@PathVariable Integer id) throws FileNotFoundException {
+    Persona obtenerPersona(@PathVariable Integer id) {
         return ps.obtenerPersona(id);
     }
     @GetMapping("/nombre/{nombre}")
-    Persona obtenerPersonaPorNombre(@PathVariable String nombre) throws FileNotFoundException {
+    Persona obtenerPersonaPorNombre(@PathVariable String nombre) {
         return ps.obtenerPersonaPorNombre(nombre);
     }
     @GetMapping("/all")

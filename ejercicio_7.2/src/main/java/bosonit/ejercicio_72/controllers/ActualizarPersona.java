@@ -12,7 +12,7 @@ public class ActualizarPersona {
     PersonaService ps;
 
     @PutMapping("/{id}")
-    Persona actualizarPersona(@PathVariable("id") Integer id, @RequestBody Persona p){
+    Persona actualizarPersona(@PathVariable("id") Integer id, @RequestBody Persona p) {
         return ps.actualizarPersona(id,p);
     }
 }
