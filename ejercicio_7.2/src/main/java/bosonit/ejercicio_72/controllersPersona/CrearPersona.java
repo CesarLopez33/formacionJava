@@ -1,7 +1,7 @@
-package bosonit.ejercicio_72.controllers;
+package bosonit.ejercicio_72.controllersPersona;
 
-import bosonit.ejercicio_72.Persona;
-import bosonit.ejercicio_72.PersonaService;
+import bosonit.ejercicio_72.entities.Persona;
+import bosonit.ejercicio_72.services.PersonaService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;

@@ -1,6 +1,6 @@
 package bosonit.ejercicio_72.repository;
 
-import bosonit.ejercicio_72.Persona;
+import bosonit.ejercicio_72.entities.Persona;
 import org.springframework.data.repository.CrudRepository;
 
 import java.util.Optional;

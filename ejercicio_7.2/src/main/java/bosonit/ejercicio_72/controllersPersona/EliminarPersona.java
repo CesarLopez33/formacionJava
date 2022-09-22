@@ -1,6 +1,6 @@
-package bosonit.ejercicio_72.controllers;
+package bosonit.ejercicio_72.controllersPersona;
 
-import bosonit.ejercicio_72.PersonaService;
+import bosonit.ejercicio_72.services.PersonaService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.PathVariable;

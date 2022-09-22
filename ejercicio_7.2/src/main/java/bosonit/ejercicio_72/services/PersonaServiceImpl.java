@@ -1,7 +1,9 @@
-package bosonit.ejercicio_72;
+package bosonit.ejercicio_72.services;
 
+import bosonit.ejercicio_72.entities.Persona;
 import bosonit.ejercicio_72.exceptions.UnprocessableEntityException;
 import bosonit.ejercicio_72.repository.PersonaRepository;
+import bosonit.ejercicio_72.services.PersonaService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.stereotype.Service;
@@ -11,21 +13,21 @@ import java.util.ArrayList;
 import java.util.List;
 
 @Service
-public class PersonaServiceImpl implements PersonaService{
+public class PersonaServiceImpl implements PersonaService {
     @Autowired
-    PersonaRepository ps;
+    PersonaRepository pr;
 
 
     @Override
     public void crearPersona(Persona persona){
         compruebaCampos(persona);
-        ps.save(persona);
+        pr.save(persona);
     }
 
     @Override
     public Persona actualizarPersona(Integer id, Persona persona){
 
-        Persona p = ps.findById(id).orElseThrow(() -> new EntityNotFoundException(
+        Persona p = pr.findById(id).orElseThrow(() -> new EntityNotFoundException(
                 "No se ha encontrado a la persona con id: "+ id));
 
         if(persona.getUsuario()!=null){
@@ -39,7 +41,7 @@ public class PersonaServiceImpl implements PersonaService{
         if(persona.getCity()!=null){p.setCity(persona.getCity());}
         if(persona.getActive()!=null){p.setActive(persona.getActive());}
         if(persona.getCreated_date()!=null){p.setCreated_date(persona.getCreated_date());}
-        ps.save(p);
+        pr.save(p);
         return p;
 
     }
@@ -47,25 +49,25 @@ public class PersonaServiceImpl implements PersonaService{
     @Override
     public void eliminarPersona(Integer id) {
         try {
-            ps.deleteById(id);
+            pr.deleteById(id);
         }catch (EmptyResultDataAccessException e){
             throw new EntityNotFoundException("No se ha encontrado a la persona con id: " + id);
         }
     }
     @Override
     public Persona obtenerPersona(Integer id){
-        return ps.findById(id).orElseThrow(() -> new EntityNotFoundException(
+        return pr.findById(id).orElseThrow(() -> new EntityNotFoundException(
                 "No se ha encontrado a la persona con id: "+ id));
     }
     @Override
     public Persona obtenerPersonaPorNombre(String nombre){
-        return ps.findFirstByName(nombre).orElseThrow(()->new EntityNotFoundException(
+        return pr.findFirstByName(nombre).orElseThrow(()->new EntityNotFoundException(
                 "No se ha encontrado a la persona con nombre: "+ nombre));
     }
     @Override
     public List<Persona> obtenerTodasPersonas() {
         ArrayList personas = new ArrayList<>();
-        ps.findAll().forEach(p->personas.add(p));
+        pr.findAll().forEach(p->personas.add(p));
         return personas;
     }
 

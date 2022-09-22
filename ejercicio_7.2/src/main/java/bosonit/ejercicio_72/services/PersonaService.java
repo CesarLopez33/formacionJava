@@ -1,6 +1,7 @@
-package bosonit.ejercicio_72;
+package bosonit.ejercicio_72.services;
 
-import bosonit.ejercicio_72.exceptions.UnprocessableEntityException;
+import bosonit.ejercicio_72.entities.Persona;
+
 import java.util.List;
 
 public interface PersonaService {

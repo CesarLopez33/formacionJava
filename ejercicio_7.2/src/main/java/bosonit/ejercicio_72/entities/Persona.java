@@ -1,7 +1,8 @@
-package bosonit.ejercicio_72;
+package bosonit.ejercicio_72.entities;
 
 import lombok.Data;
 import javax.persistence.*;
+import java.util.Date;
 
 @Data
 @Entity
@@ -27,9 +28,9 @@ public class Persona implements java.io.Serializable{
     @Column
     private Boolean active;
     @Column
-    private String created_date;
+    private Date created_date;
     @Column
     private String imagen_url;
     @Column
-    private String termination_date;
+    private Date termination_date;
 }
