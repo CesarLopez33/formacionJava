@@ -16,7 +16,7 @@ public class MiGenerador implements IdentifierGenerator{
                 o.getClass().getSimpleName());
 
         Stream<String> ids = session.createQuery(query).stream();
-        int max = ids.mapToInt(Integer::parseInt)
+        Integer max = ids.mapToInt(Integer::parseInt)
                 .max()
                 .orElse(0);
 
