@@ -2,6 +2,9 @@ package bosonit.ejercicio_72.persona.service;
 
 import bosonit.ejercicio_72.persona.Persona;
 import bosonit.ejercicio_72.exceptions.UnprocessableEntityException;
+import bosonit.ejercicio_72.persona.dtos.PersonaInputDTO;
+import bosonit.ejercicio_72.persona.dtos.PersonaProfesorFullOutputDTO;
+import bosonit.ejercicio_72.persona.dtos.PersonaStudentFullOutputDTO;
 import bosonit.ejercicio_72.persona.repository.PersonaRepository;
 import bosonit.ejercicio_72.profesor.Profesor;
 import bosonit.ejercicio_72.profesor.dtos.ProfesorPersonaOutputDTO;
@@ -27,17 +30,25 @@ public class PersonaServiceImpl implements PersonaService {
     @Autowired
     StudentRepository studentRepository;
     @Autowired
-    ProfesorRepository profesorRepositoryr;
+    ProfesorRepository profesorRepository;
 
 
     @Override
-    public void crearPersona(Persona persona){
+    public void crearPersona(PersonaInputDTO persona){
         compruebaCampos(persona);
-        personaRepository.save(persona);
+        Persona p = new Persona(persona);
+        if(persona.getId_student()!=null)
+            p.setStudent(studentRepository.findById(persona.getId_student()).orElseThrow(()->
+                new EntityNotFoundException("No se ha encontrado estudiante con id "+persona.getId_student())));
+        if(persona.getId_profesor()!=null)
+            p.setProfesor(profesorRepository.findById(persona.getId_profesor()).orElseThrow(()->
+                new EntityNotFoundException("No se ha encontrado profesor con id "+persona.getId_profesor())));
+
+        personaRepository.save(p);
     }
 
     @Override
-    public Persona actualizarPersona(Integer id, Persona persona){
+    public Persona actualizarPersona(Integer id, PersonaInputDTO persona){
 
         Persona p = personaRepository.findById(id).orElseThrow(() -> new EntityNotFoundException(
                 "No se ha encontrado a la persona con id: "+ id));
@@ -77,9 +88,9 @@ public class PersonaServiceImpl implements PersonaService {
         Persona persona = personaRepository.findById(id).orElseThrow(() -> new EntityNotFoundException(
                 "No se ha encontrado a la persona con id: "+ id));
         Optional<Student> student = studentRepository.findByPersona(persona);
-        if(student.isPresent()) return new ResponseEntity(new StudentPersonaOutputDTO(student.get()), HttpStatus.OK);
-        Optional<Profesor> profesor = profesorRepositoryr.findByPersona(persona);
-        if(profesor.isPresent()) return new ResponseEntity(new ProfesorPersonaOutputDTO(profesor.get()),HttpStatus.OK);
+        if(student.isPresent()) return new ResponseEntity(new PersonaStudentFullOutputDTO(student.get()), HttpStatus.OK);
+        Optional<Profesor> profesor = profesorRepository.findByPersona(persona);
+        if(profesor.isPresent()) return new ResponseEntity(new PersonaProfesorFullOutputDTO(profesor.get()),HttpStatus.OK);
         throw new EntityNotFoundException("La persona no tiene ni estudiante ni profesor asociados");
     }
 
@@ -97,7 +108,7 @@ public class PersonaServiceImpl implements PersonaService {
         ArrayList<Object> datos = new ArrayList<>();
         for(Persona p : personas){
             Optional<Student> student = studentRepository.findByPersona(p);
-            Optional<Profesor> profesor = profesorRepositoryr.findByPersona(p);
+            Optional<Profesor> profesor = profesorRepository.findByPersona(p);
             if(student.isPresent()) datos.add(new StudentPersonaOutputDTO(student.get()));
             else if(profesor.isPresent()) datos.add(new ProfesorPersonaOutputDTO(profesor.get()));
             else datos.add(p);
@@ -119,7 +130,7 @@ public class PersonaServiceImpl implements PersonaService {
         ArrayList<Object> datos = new ArrayList<>();
         for(Persona p : personas){
             Optional<Student> student = studentRepository.findByPersona(p);
-            Optional<Profesor> profesor = profesorRepositoryr.findByPersona(p);
+            Optional<Profesor> profesor = profesorRepository.findByPersona(p);
             if(student.isPresent()) datos.add(new StudentPersonaOutputDTO(student.get()));
             else if(profesor.isPresent()) datos.add(new ProfesorPersonaOutputDTO(profesor.get()));
             else datos.add(p);
@@ -127,7 +138,7 @@ public class PersonaServiceImpl implements PersonaService {
         return new ResponseEntity(datos,HttpStatus.OK);
     }
 
-    private static void compruebaCampos(Persona p){
+    private static void compruebaCampos(PersonaInputDTO p){
         if(p.getUsuario()==null){throw new UnprocessableEntityException("Usuario no puede ser nulo");}
         if(p.getUsuario().length()>10){throw new UnprocessableEntityException("Longitud usuario no puede ser superior a 10");}
         if(p.getUsuario().length()<6){throw new UnprocessableEntityException("Longitud de usuario no puede ser inferior a 6");}
@@ -138,5 +149,7 @@ public class PersonaServiceImpl implements PersonaService {
         if(p.getCity()==null){throw new UnprocessableEntityException("City no puede ser nulo");}
         if(p.getActive()==null){throw new UnprocessableEntityException("Campo active no puede ser nulo");}
         if(p.getCreated_date()==null){throw new UnprocessableEntityException("Created_date no puede ser nulo");}
+        if(p.getId_profesor()!=null && p.getId_student()!=null)
+            throw new UnprocessableEntityException("Una persona no puede ser estudiante y profesor a la vez");
     }
 }
