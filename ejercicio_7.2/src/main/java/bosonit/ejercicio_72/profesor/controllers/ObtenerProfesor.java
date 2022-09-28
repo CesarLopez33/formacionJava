@@ -1,5 +1,6 @@
 package bosonit.ejercicio_72.profesor.controllers;
 
+import bosonit.ejercicio_72.profesor.dtos.ProfesorOutputDTO;
 import bosonit.ejercicio_72.profesor.service.ProfesorService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;

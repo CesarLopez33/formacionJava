@@ -1,12 +1,12 @@
 package bosonit.ejercicio_72.student.service;
 
-import bosonit.ejercicio_72.asignaturas.service.AsignaturaService;
+import bosonit.ejercicio_72.asignaturas.repositories.AsignaturaRepository;
 import bosonit.ejercicio_72.exceptions.UnprocessableEntityException;
-import bosonit.ejercicio_72.persona.service.PersonaService;
+import bosonit.ejercicio_72.persona.Persona;
+import bosonit.ejercicio_72.persona.repository.PersonaRepository;
 import bosonit.ejercicio_72.profesor.repository.ProfesorRepository;
 import bosonit.ejercicio_72.student.dtos.IdsAsignaturasInputDTO;
 import bosonit.ejercicio_72.student.dtos.StudentInputDTO;
-import bosonit.ejercicio_72.persona.Persona;
 import bosonit.ejercicio_72.student.Student;
 import bosonit.ejercicio_72.student.dtos.StudentOutputDTO;
 import bosonit.ejercicio_72.student.dtos.StudentPersonaOutputDTO;
@@ -25,9 +25,9 @@ public class StudentserviceImpl implements StudentService {
     @Autowired
     ProfesorRepository profesorRepository;
     @Autowired
-    PersonaService personaService;
+    PersonaRepository personaRepository;
     @Autowired
-    AsignaturaService asignaturaService;
+    AsignaturaRepository asignaturaRepository;
 
     @Override
     public void crearStudent(StudentInputDTO student) {
@@ -35,7 +35,11 @@ public class StudentserviceImpl implements StudentService {
         if(student.getBranch()==null) throw new UnprocessableEntityException("Branch no puede ser nulo");
         if(student.getId_persona()==null) throw new UnprocessableEntityException("id_persona no puede ser nulo");
         Student s = new Student(student);
-        s.setPersona(personaService.obtenerPersona(student.getId_persona()));
+        Persona p = personaRepository.findById(student.getId_persona()).orElseThrow(()->
+                new EntityNotFoundException("No se ha encontrado persona con id "+ student.getId_persona()));
+        if (p.getStudent()==null && p.getProfesor()==null) {
+            s.setPersona(p);
+        }else throw new UnprocessableEntityException("La persona con id "+student.getId_persona()+" ya esta asignada");
         s.setProfesor(profesorRepository.findById(student.getId_profesor()).orElseThrow(()->
                 new EntityNotFoundException("No se ha encontrado profesor con id "+ student.getId_profesor())));
         studentRepository.save(s);
@@ -87,7 +91,8 @@ public class StudentserviceImpl implements StudentService {
     public void addAsignaturas(String id, IdsAsignaturasInputDTO ids_asig) {
         Student student = studentRepository.findById(id).orElseThrow(() -> new EntityNotFoundException(
                 "No se ha encontrado al estudiante con id: "+ id));
-        ids_asig.getIds().forEach(idAsig-> student.getAsignaturas().add(asignaturaService.obtenerAsignatura(idAsig)));
+        ids_asig.getIds().forEach(idAsig-> student.getAsignaturas().add(asignaturaRepository.findById(idAsig)
+                .orElseThrow(()-> new EntityNotFoundException("No se ha encontrado asignatura con id: "+idAsig))));
         studentRepository.save(student);
     }
 
@@ -95,7 +100,8 @@ public class StudentserviceImpl implements StudentService {
     public void deleteAsignaturas(String id, IdsAsignaturasInputDTO ids_asig) {
         Student student = studentRepository.findById(id).orElseThrow(() -> new EntityNotFoundException(
                 "No se ha encontrado al estudiante con id: "+ id));
-        ids_asig.getIds().forEach(idAsig-> student.getAsignaturas().remove(asignaturaService.obtenerAsignatura(idAsig)));
+        ids_asig.getIds().forEach(idAsig-> student.getAsignaturas().remove(asignaturaRepository.findById(idAsig)
+                .orElseThrow(()-> new EntityNotFoundException("No se ha encontrado asignatura con id: "+idAsig))));
         studentRepository.save(student);
     }
 }

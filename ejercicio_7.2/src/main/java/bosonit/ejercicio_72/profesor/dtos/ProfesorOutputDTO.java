@@ -2,8 +2,10 @@ package bosonit.ejercicio_72.profesor.dtos;
 
 import bosonit.ejercicio_72.profesor.Profesor;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
 @Data
+@NoArgsConstructor
 public class ProfesorOutputDTO {
     private String id_profesor;
     private Integer id_persona;

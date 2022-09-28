@@ -2,10 +2,12 @@ package bosonit.ejercicio_72.profesor.dtos;
 
 import bosonit.ejercicio_72.profesor.Profesor;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
 import java.util.Date;
 
 @Data
+@NoArgsConstructor
 public class ProfesorPersonaOutputDTO {
     private String id_profesor;
     private String comments;

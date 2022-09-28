@@ -33,7 +33,6 @@ public class Student implements java.io.Serializable{
     @Column
     private String comments;
     @ManyToOne(fetch = FetchType.LAZY)
-    @JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
     @JoinColumn(name="id_profesor")
     private Profesor profesor;
     @Column

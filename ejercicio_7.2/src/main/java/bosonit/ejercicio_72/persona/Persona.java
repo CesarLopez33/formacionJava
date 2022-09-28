@@ -60,4 +60,5 @@ public class Persona implements java.io.Serializable{
         this.imagen_url = p.getImagen_url();
         this.termination_date = p.getTermination_date();
     }
+
 }

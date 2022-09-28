@@ -2,7 +2,7 @@ package bosonit.ejercicio_72.profesor.service;
 
 import bosonit.ejercicio_72.exceptions.UnprocessableEntityException;
 import bosonit.ejercicio_72.persona.Persona;
-import bosonit.ejercicio_72.persona.service.PersonaService;
+import bosonit.ejercicio_72.persona.repository.PersonaRepository;
 import bosonit.ejercicio_72.profesor.Profesor;
 import bosonit.ejercicio_72.profesor.dtos.ProfesorInputDTO;
 import bosonit.ejercicio_72.profesor.dtos.ProfesorOutputDTO;
@@ -19,14 +19,18 @@ public class ProfesorServiceImpl implements ProfesorService{
     @Autowired
     ProfesorRepository profesorRepository;
     @Autowired
-    PersonaService personaService;
+    PersonaRepository personaRepository;
 
     @Override
     public void crearProfesor(ProfesorInputDTO profesor) {
         if (profesor.getBranch()==null) throw new UnprocessableEntityException("Branch no puede ser nulo");
         if (profesor.getId_persona()==null) throw new UnprocessableEntityException("id_persona no puede ser nulo");
-        Persona p = personaService.obtenerPersona(profesor.getId_persona());
         Profesor pro = new Profesor(profesor);
+        Persona p = personaRepository.findById(profesor.getId_persona()).orElseThrow(()->
+                new EntityNotFoundException("No se ha encontrado persona con id: "+profesor.getId_persona()));
+        if (p.getStudent()==null && p.getProfesor()==null)
+            pro.setPersona(p);
+        else throw new UnprocessableEntityException("La persona con id "+profesor.getId_persona()+" ya esta asignada");
         pro.setPersona(p);
         profesorRepository.save(pro);
     }
