@@ -3,8 +3,6 @@ package bosonit.ejercicio_72.profesor;
 import bosonit.ejercicio_72.persona.Persona;
 import bosonit.ejercicio_72.profesor.dtos.ProfesorInputDTO;
 import bosonit.ejercicio_72.student.Student;
-import bosonit.ejercicio_72.student.repository.StudentRepository;
-import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 import lombok.Data;
 import lombok.NoArgsConstructor;

@@ -5,8 +5,6 @@ import bosonit.ejercicio_72.profesor.Profesor;
 import bosonit.ejercicio_72.persona.Persona;
 import bosonit.ejercicio_72.student.dtos.StudentInputDTO;
 
-import com.fasterxml.jackson.annotation.JsonBackReference;
-import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 import lombok.Data;
 import lombok.NoArgsConstructor;
