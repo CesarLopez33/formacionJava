@@ -3,6 +3,7 @@ package bosonit.ejercicio_72.persona.service;
 import bosonit.ejercicio_72.persona.Persona;
 import bosonit.ejercicio_72.exceptions.UnprocessableEntityException;
 import bosonit.ejercicio_72.persona.dtos.PersonaInputDTO;
+import bosonit.ejercicio_72.persona.dtos.PersonaOutputDTO;
 import bosonit.ejercicio_72.persona.dtos.PersonaProfesorFullOutputDTO;
 import bosonit.ejercicio_72.persona.dtos.PersonaStudentFullOutputDTO;
 import bosonit.ejercicio_72.persona.repository.PersonaRepository;
@@ -22,6 +23,7 @@ import javax.persistence.EntityNotFoundException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 @Service
 public class PersonaServiceImpl implements PersonaService {
@@ -43,12 +45,11 @@ public class PersonaServiceImpl implements PersonaService {
         if(persona.getId_profesor()!=null)
             p.setProfesor(profesorRepository.findById(persona.getId_profesor()).orElseThrow(()->
                 new EntityNotFoundException("No se ha encontrado profesor con id "+persona.getId_profesor())));
-
         personaRepository.save(p);
     }
 
     @Override
-    public Persona actualizarPersona(Integer id, PersonaInputDTO persona){
+    public PersonaOutputDTO actualizarPersona(Integer id, PersonaInputDTO persona){
 
         Persona p = personaRepository.findById(id).orElseThrow(() -> new EntityNotFoundException(
                 "No se ha encontrado a la persona con id: "+ id));
@@ -65,7 +66,7 @@ public class PersonaServiceImpl implements PersonaService {
         if(persona.getActive()!=null){p.setActive(persona.getActive());}
         if(persona.getCreated_date()!=null){p.setCreated_date(persona.getCreated_date());}
         personaRepository.save(p);
-        return p;
+        return new PersonaOutputDTO(p);
 
     }
 
@@ -78,9 +79,9 @@ public class PersonaServiceImpl implements PersonaService {
         }
     }
     @Override
-    public Persona obtenerPersona(Integer id){
-        return personaRepository.findById(id).orElseThrow(() -> new EntityNotFoundException(
-                "No se ha encontrado a la persona con id: "+ id));
+    public PersonaOutputDTO obtenerPersona(Integer id){
+        return new PersonaOutputDTO(personaRepository.findById(id).orElseThrow(() -> new EntityNotFoundException(
+                "No se ha encontrado a la persona con id: "+ id)));
     }
 
     @Override
@@ -95,10 +96,10 @@ public class PersonaServiceImpl implements PersonaService {
     }
 
     @Override
-    public List<Persona> obtenerPersonaPorNombre(String nombre){
+    public List<PersonaOutputDTO> obtenerPersonaPorNombre(String nombre){
         List<Persona> p = personaRepository.findByName(nombre);
         if(p.isEmpty()) throw new EntityNotFoundException("No se ha encontrado a la persona con nombre: "+ nombre);
-        else return p;
+        else return p.stream().map(person->new PersonaOutputDTO(person)).collect(Collectors.toList());
     }
 
     @Override
@@ -117,9 +118,9 @@ public class PersonaServiceImpl implements PersonaService {
     }
 
     @Override
-    public List<Persona> obtenerTodasPersonas() {
+    public List<PersonaOutputDTO> obtenerTodasPersonas() {
         ArrayList personas = new ArrayList<>();
-        personaRepository.findAll().forEach(p->personas.add(p));
+        personaRepository.findAll().forEach(p->personas.add(new PersonaOutputDTO(p)));
         return personas;
     }
 

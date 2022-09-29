@@ -6,6 +6,6 @@ import org.springframework.context.annotation.PropertySource;
 
 @Configuration
 @PropertySource("classpath:postgres.properties")
-@Profile("INT")
-public class PropertiesSourceInt {
+@Profile("docker")
+public class PropertiesSourceDocker {
 }

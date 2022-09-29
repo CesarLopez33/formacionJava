@@ -1,7 +1,6 @@
 package bosonit.ejercicio_72.persona.dtos;
 
 import bosonit.ejercicio_72.asignaturas.Estudiante_asignatura;
-import bosonit.ejercicio_72.profesor.Profesor;
 import bosonit.ejercicio_72.profesor.dtos.ProfesorOutputDTO;
 import bosonit.ejercicio_72.student.Student;
 import lombok.Data;
