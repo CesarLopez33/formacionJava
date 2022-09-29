@@ -3,6 +3,7 @@
     <envs>
       <env name="server.port" value="8081" />
       <env name="spring.datasource.url" value="jdbc:h2:file:~/db72/ejercicio7_22" />
+      <env name="–spring.profiles.active" value="local" />
     </envs>
     <option name="MAIN_CLASS_NAME" value="bosonit.ejercicio_72.Application" />
     <module name="ejercicio_7.2" />
