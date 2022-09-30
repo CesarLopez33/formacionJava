@@ -1,0 +1,38 @@
+{
+	"info": {
+		"_postman_id": "6f3d9382-69b9-4a4e-b80f-c112c9d278ef",
+		"name": "ejercicio_12.1",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "23389055"
+	},
+	"item": [
+		{
+			"name": "sendMessageKafka",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "Se solicita mensaje por parte del cliente",
+					"options": {
+						"raw": {
+							"language": "text"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8080/send",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"send"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
