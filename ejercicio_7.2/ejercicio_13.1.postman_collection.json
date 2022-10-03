@@ -1,0 +1,207 @@
+{
+	"info": {
+		"_postman_id": "c9505732-de32-4055-9302-bf2b7f367088",
+		"name": "ejercicio_13.1",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "23389055"
+	},
+	"item": [
+		{
+			"name": "CriteriaBuilderTest",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8080/persona/criterio?usuario=pepepe&surname=vicente&created_date=1964-12-27&date_condition=greater&order_by=name&num_page=0&page_size=3",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"persona",
+						"criterio"
+					],
+					"query": [
+						{
+							"key": "usuario",
+							"value": "pepepe"
+						},
+						{
+							"key": "name",
+							"value": "juan",
+							"disabled": true
+						},
+						{
+							"key": "surname",
+							"value": "vicente"
+						},
+						{
+							"key": "created_date",
+							"value": "1964-12-27"
+						},
+						{
+							"key": "date_condition",
+							"value": "greater",
+							"description": "equal/greater/less"
+						},
+						{
+							"key": "order_by",
+							"value": "name",
+							"description": "name/user"
+						},
+						{
+							"key": "num_page",
+							"value": "0"
+						},
+						{
+							"key": "page_size",
+							"value": "3"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "crearPersona1",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"usuario\":\"juanma123\",\r\n    \"name\":\"juanma\",\r\n    \"surname\":\"castano\",\r\n    \"password\":\"aaa\",\r\n    \"company_email\":\"asdasdasd\",\r\n    \"personal_email\":\"asdasdasd2\",\r\n    \"city\":\"Madrid\",\r\n    \"active\":true,\r\n    \"created_date\":\"1987-02-07\",\r\n    \"imagen_url\":\"asdasdasd.com\",\r\n    \"termination_date\":\"2003-11-29\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8080/persona",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"persona"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "crearPersona2",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"usuario\":\"pepepe\",\r\n    \"name\":\"miguel\",\r\n    \"surname\":\"perez\",\r\n    \"password\":\"aaa\",\r\n    \"company_email\":\"asdasdasd\",\r\n    \"personal_email\":\"asdasdasd2\",\r\n    \"city\":\"Madrid\",\r\n    \"active\":true,\r\n    \"created_date\":\"1989-02-27\",\r\n    \"imagen_url\":\"asdasdasd.com\",\r\n    \"termination_date\":\"2003-11-29\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8080/persona",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"persona"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "crearPersona3",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"usuario\":\"ramoncin\",\r\n    \"name\":\"ramon\",\r\n    \"surname\":\"lopez\",\r\n    \"password\":\"aaa\",\r\n    \"company_email\":\"asdasdasd\",\r\n    \"personal_email\":\"asdasdasd2\",\r\n    \"city\":\"Madrid\",\r\n    \"active\":true,\r\n    \"created_date\":\"2000-10-02\",\r\n    \"imagen_url\":\"asdasdasd.com\",\r\n    \"termination_date\":\"2003-11-29\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8080/persona",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"persona"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "crearPersona4",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"usuario\":\"juanma123\",\r\n    \"name\":\"juanma\",\r\n    \"surname\":\"lopez\",\r\n    \"password\":\"aaa\",\r\n    \"company_email\":\"asdasdasd\",\r\n    \"personal_email\":\"asdasdasd2\",\r\n    \"city\":\"Madrid\",\r\n    \"active\":true,\r\n    \"created_date\":\"1998-11-14\",\r\n    \"imagen_url\":\"asdasdasd.com\",\r\n    \"termination_date\":\"2003-11-29\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8080/persona",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"persona"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "crearPersona5",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"usuario\":\"pepepe\",\r\n    \"name\":\"pepe\",\r\n    \"surname\":\"vicente\",\r\n    \"password\":\"aaa\",\r\n    \"company_email\":\"asdasdasd\",\r\n    \"personal_email\":\"asdasdasd2\",\r\n    \"city\":\"Madrid\",\r\n    \"active\":true,\r\n    \"created_date\":\"1965-12-13\",\r\n    \"imagen_url\":\"asdasdasd.com\",\r\n    \"termination_date\":\"2003-11-29\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8080/persona",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"persona"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}

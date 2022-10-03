@@ -4,6 +4,7 @@ import bosonit.ejercicio_72.persona.dtos.PersonaInputDTO;
 import bosonit.ejercicio_72.persona.dtos.PersonaOutputDTO;
 import org.springframework.http.ResponseEntity;
 
+import java.util.HashMap;
 import java.util.List;
 
 public interface PersonaService {
@@ -18,4 +19,5 @@ public interface PersonaService {
     List<PersonaOutputDTO> obtenerTodasPersonas();
     ResponseEntity obtenerTodasPersonaConTodo();
 
+    List<PersonaOutputDTO> obtenerPersonaPorCriterio(HashMap<String, Object> condiciones,int numPage,int pageSize);
 }

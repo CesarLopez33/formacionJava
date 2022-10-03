@@ -21,6 +21,7 @@ import org.springframework.stereotype.Service;
 
 import javax.persistence.EntityNotFoundException;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
@@ -137,6 +138,11 @@ public class PersonaServiceImpl implements PersonaService {
             else datos.add(p);
         }
         return new ResponseEntity(datos,HttpStatus.OK);
+    }
+
+    @Override
+    public List<PersonaOutputDTO> obtenerPersonaPorCriterio(HashMap<String, Object> condiciones, int numPage, int pageSize) {
+        return personaRepository.getData(condiciones, numPage, pageSize).stream().map(p-> new PersonaOutputDTO(p)).toList();
     }
 
     private static void compruebaCampos(PersonaInputDTO p){
