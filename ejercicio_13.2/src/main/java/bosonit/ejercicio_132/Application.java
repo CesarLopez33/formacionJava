@@ -11,6 +11,7 @@ public class Application {
 	//Username: myuser
 	//Password: bosonit
 	//Ejercicio de crud sobre persona usando mongoTemplate
+	//Ver ejercicio_13.2.postman_collection.json para testeo
 	public static void main(String[] args) {
 		SpringApplication.run(Application.class, args);
 	}

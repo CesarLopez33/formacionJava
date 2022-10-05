@@ -60,6 +60,7 @@ public class PersonaServiceImpl implements PersonaService{
         mongoTemplate.remove(query,Persona.class);
 
         /*
+        //Otra manera de hacerlo
         Persona p = mongoTemplate.findById(id,Persona.class);
         if (p!=null) mongoTemplate.remove(p);
         */

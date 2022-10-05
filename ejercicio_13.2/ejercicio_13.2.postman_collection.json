@@ -1,0 +1,157 @@
+{
+	"info": {
+		"_postman_id": "f028e7bd-e52d-4476-970a-359b730317c3",
+		"name": "ejercicio_13.2",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "23389055"
+	},
+	"item": [
+		{
+			"name": "obtenerPersona",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8080/persona/1",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"persona",
+						"1"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "obtenerTodasPersonas",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8080/persona/all",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"persona",
+						"all"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "obtenerTodasPersonasPaginada",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8080/persona/allPaginated?pageSize=5&numPage=0",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"persona",
+						"allPaginated"
+					],
+					"query": [
+						{
+							"key": "pageSize",
+							"value": "5"
+						},
+						{
+							"key": "numPage",
+							"value": "0"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "CrearPersona",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"usuario\":\"Juanes\",\r\n    \"name\":\"Manuel\",\r\n    \"surname\":\"Perez\",\r\n    \"password\":\"aaa\",\r\n    \"company_email\":\"asdasdasd\",\r\n    \"personal_email\":\"asdasdasd2\",\r\n    \"city\":\"Madrid\",\r\n    \"active\":true,\r\n    \"created_date\":\"2001-12-27\",\r\n    \"imagen_url\":\"asdasdasd.com\",\r\n    \"termination_date\":\"2003-11-23\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8080/persona",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"persona"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "actualizarPersona",
+			"request": {
+				"method": "PUT",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"usuario\":\"Manuel22\",\r\n    \"name\":\"Juan\",\r\n    \"surname\":\"Lopez\",\r\n    \"password\":\"bbbb\",\r\n    \"company_email\":\"sisisi\",\r\n    \"personal_email\":\"sisisi2\",\r\n    \"city\":\"Cuenca\",\r\n    \"active\":false,\r\n    \"created_date\":\"2012-12-27\",\r\n    \"imagen_url\":\"dasdas.com\",\r\n    \"termination_date\":\"2013-11-23\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8080/persona/2",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"persona",
+						"2"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "eliminarPersona",
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8080/persona/3",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"persona",
+						"3"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
