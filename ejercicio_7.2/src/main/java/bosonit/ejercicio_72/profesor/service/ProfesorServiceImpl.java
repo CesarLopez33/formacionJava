@@ -22,7 +22,7 @@ public class ProfesorServiceImpl implements ProfesorService{
     PersonaRepository personaRepository;
 
     @Override
-    public void crearProfesor(ProfesorInputDTO profesor) {
+    public ProfesorOutputDTO crearProfesor(ProfesorInputDTO profesor) {
         if (profesor.getBranch()==null) throw new UnprocessableEntityException("Branch no puede ser nulo");
         if (profesor.getId_persona()==null) throw new UnprocessableEntityException("id_persona no puede ser nulo");
         Profesor pro = new Profesor(profesor);
@@ -33,6 +33,7 @@ public class ProfesorServiceImpl implements ProfesorService{
         else throw new UnprocessableEntityException("La persona con id "+profesor.getId_persona()+" ya esta asignada");
         pro.setPersona(p);
         profesorRepository.save(pro);
+        return new ProfesorOutputDTO(pro);
     }
 
     @Override

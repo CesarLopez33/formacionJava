@@ -1,6 +1,7 @@
 package bosonit.ejercicio_72.profesor.controllers;
 
 import bosonit.ejercicio_72.profesor.dtos.ProfesorInputDTO;
+import bosonit.ejercicio_72.profesor.dtos.ProfesorOutputDTO;
 import bosonit.ejercicio_72.profesor.service.ProfesorService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -15,7 +16,7 @@ public class CrearProfesor {
     ProfesorService ps;
 
     @PostMapping
-    void crearProfesor(@RequestBody ProfesorInputDTO profesor){
-        ps.crearProfesor(profesor);
+    ProfesorOutputDTO crearProfesor(@RequestBody ProfesorInputDTO profesor){
+        return ps.crearProfesor(profesor);
     }
 }

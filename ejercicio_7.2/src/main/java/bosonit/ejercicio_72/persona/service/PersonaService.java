@@ -9,7 +9,7 @@ import java.util.List;
 
 public interface PersonaService {
 
-    void crearPersona(PersonaInputDTO persona);
+    PersonaOutputDTO crearPersona(PersonaInputDTO persona);
     PersonaOutputDTO actualizarPersona(Integer id,PersonaInputDTO persona);
     void eliminarPersona(Integer id);
     PersonaOutputDTO obtenerPersona(Integer id);

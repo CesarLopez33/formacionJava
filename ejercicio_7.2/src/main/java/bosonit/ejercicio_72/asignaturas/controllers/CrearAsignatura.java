@@ -1,6 +1,7 @@
 package bosonit.ejercicio_72.asignaturas.controllers;
 
 import bosonit.ejercicio_72.asignaturas.dtos.AsignaturaInputDTO;
+import bosonit.ejercicio_72.asignaturas.dtos.AsignaturaOutputDTO;
 import bosonit.ejercicio_72.asignaturas.service.AsignaturaService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -15,7 +16,7 @@ public class CrearAsignatura {
     AsignaturaService as;
 
     @PostMapping
-    void crearAsignatura(@RequestBody AsignaturaInputDTO a){
-        as.crearAsignatura(a);
+    AsignaturaOutputDTO crearAsignatura(@RequestBody AsignaturaInputDTO a){
+        return as.crearAsignatura(a);
     }
 }

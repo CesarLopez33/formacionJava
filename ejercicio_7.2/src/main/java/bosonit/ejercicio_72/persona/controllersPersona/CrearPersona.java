@@ -1,6 +1,7 @@
 package bosonit.ejercicio_72.persona.controllersPersona;
 
 import bosonit.ejercicio_72.persona.dtos.PersonaInputDTO;
+import bosonit.ejercicio_72.persona.dtos.PersonaOutputDTO;
 import bosonit.ejercicio_72.persona.service.PersonaService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -16,7 +17,7 @@ public class CrearPersona {
     PersonaService ps;
 
     @PostMapping()
-    void crearPersona(@RequestBody PersonaInputDTO p) {
-        ps.crearPersona(p);
+    PersonaOutputDTO crearPersona(@RequestBody PersonaInputDTO p) {
+        return ps.crearPersona(p);
     }
 }

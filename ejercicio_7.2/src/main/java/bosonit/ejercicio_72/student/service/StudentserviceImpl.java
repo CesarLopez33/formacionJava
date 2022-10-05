@@ -30,7 +30,7 @@ public class StudentserviceImpl implements StudentService {
     AsignaturaRepository asignaturaRepository;
 
     @Override
-    public void crearStudent(StudentInputDTO student) {
+    public StudentOutputDTO crearStudent(StudentInputDTO student) {
         if(student.getNum_hours_week()==null) throw new UnprocessableEntityException("Num_hours_week no puede ser nulo");
         if(student.getBranch()==null) throw new UnprocessableEntityException("Branch no puede ser nulo");
         if(student.getId_persona()==null) throw new UnprocessableEntityException("id_persona no puede ser nulo");
@@ -43,6 +43,7 @@ public class StudentserviceImpl implements StudentService {
         s.setProfesor(profesorRepository.findById(student.getId_profesor()).orElseThrow(()->
                 new EntityNotFoundException("No se ha encontrado profesor con id "+ student.getId_profesor())));
         studentRepository.save(s);
+        return new StudentOutputDTO(s);
     }
 
     @Override

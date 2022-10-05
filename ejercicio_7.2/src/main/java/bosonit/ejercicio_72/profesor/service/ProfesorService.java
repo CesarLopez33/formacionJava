@@ -5,7 +5,7 @@ import bosonit.ejercicio_72.profesor.dtos.ProfesorOutputDTO;
 import bosonit.ejercicio_72.profesor.dtos.ProfesorPersonaOutputDTO;
 
 public interface ProfesorService {
-    void crearProfesor(ProfesorInputDTO profesor);
+    ProfesorOutputDTO crearProfesor(ProfesorInputDTO profesor);
     ProfesorOutputDTO obtenerProfesor(String id);
     ProfesorPersonaOutputDTO obtenerProfesorPersona(String id);
     ProfesorOutputDTO actualizarProfesor(ProfesorInputDTO profesor, String id);

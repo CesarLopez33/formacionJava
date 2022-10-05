@@ -9,7 +9,7 @@ import bosonit.ejercicio_72.student.dtos.StudentPersonaOutputDTO;
 import java.util.List;
 
 public interface StudentService {
-    void crearStudent(StudentInputDTO Student);
+    StudentOutputDTO crearStudent(StudentInputDTO Student);
     StudentOutputDTO actualizarStudent(String id, StudentInputDTO Student);
     void eliminarStudent(String id);
     StudentOutputDTO obtenerStudent(String id);

@@ -2,6 +2,7 @@ package bosonit.ejercicio_72.asignaturas.service;
 
 import bosonit.ejercicio_72.asignaturas.Estudiante_asignatura;
 import bosonit.ejercicio_72.asignaturas.dtos.AsignaturaInputDTO;
+import bosonit.ejercicio_72.asignaturas.dtos.AsignaturaOutputDTO;
 import bosonit.ejercicio_72.asignaturas.repositories.AsignaturaRepository;
 import bosonit.ejercicio_72.exceptions.UnprocessableEntityException;
 import bosonit.ejercicio_72.student.Student;
@@ -22,10 +23,11 @@ public class AsignaturaServiceImpl implements AsignaturaService{
     StudentRepository studentRepository;
 
     @Override
-    public void crearAsignatura(AsignaturaInputDTO a) {
+    public AsignaturaOutputDTO crearAsignatura(AsignaturaInputDTO a) {
         if (a.getInitial_date()==null) throw new UnprocessableEntityException("Initial_date no puede ser nulo");
         Estudiante_asignatura e = new Estudiante_asignatura(a);
         asignaturaRepository.save(e);
+        return new AsignaturaOutputDTO(e);
     }
 
     @Override

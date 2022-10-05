@@ -37,7 +37,7 @@ public class PersonaServiceImpl implements PersonaService {
 
 
     @Override
-    public void crearPersona(PersonaInputDTO persona){
+    public PersonaOutputDTO crearPersona(PersonaInputDTO persona){
         compruebaCampos(persona);
         Persona p = new Persona(persona);
         if(persona.getId_student()!=null)
@@ -47,6 +47,7 @@ public class PersonaServiceImpl implements PersonaService {
             p.setProfesor(profesorRepository.findById(persona.getId_profesor()).orElseThrow(()->
                 new EntityNotFoundException("No se ha encontrado profesor con id "+persona.getId_profesor())));
         personaRepository.save(p);
+        return new PersonaOutputDTO(p);
     }
 
     @Override
