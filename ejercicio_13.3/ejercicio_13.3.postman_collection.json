@@ -1,0 +1,121 @@
+{
+	"info": {
+		"_postman_id": "1cb726bc-651f-4575-9325-1de4ac502d19",
+		"name": "ejercicio_13.3",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "23389055"
+	},
+	"item": [
+		{
+			"name": "uploadFile",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "formdata",
+					"formdata": [
+						{
+							"key": "file",
+							"description": "Seleccionar un fichero a subir",
+							"type": "file",
+							"src": "/C:/Users/cesar.lopez/Documentos/Proyectos java/Z pruebas/nada.txt",
+							"disabled": true
+						},
+						{
+							"key": "file",
+							"description": "Seleccionar un fichero a subir",
+							"type": "file",
+							"src": "/C:/Users/cesar.lopez/Documentos/Proyectos java/Z pruebas/algo.xml"
+						},
+						{
+							"key": "category",
+							"value": "ciencia",
+							"type": "text"
+						}
+					]
+				},
+				"url": {
+					"raw": "http://localhost:8080/upload/xml",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"upload",
+						"xml"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "downloadFileByName",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8080/download/fileByName/algo.xml",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"download",
+						"fileByName",
+						"algo.xml"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "downloadFileById",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8080/download/fileById/1",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"download",
+						"fileById",
+						"1"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "setPath",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8080/setpath?path=C:/Users/cesar.lopez/Documentos/prueba133",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"setpath"
+					],
+					"query": [
+						{
+							"key": "path",
+							"value": "C:/Users/cesar.lopez/Documentos/prueba133",
+							"description": "Introducir ruta absoluta de guardado"
+						}
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}

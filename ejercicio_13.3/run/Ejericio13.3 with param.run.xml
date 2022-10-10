@@ -1,0 +1,10 @@
+<component name="ProjectRunConfigurationManager">
+  <configuration default="false" name="Ejericio13.3 with param" type="Application" factoryName="Application">
+    <option name="MAIN_CLASS_NAME" value="bosonit.Ejercicio_133" />
+    <module name="ejercicio_13.3" />
+    <option name="PROGRAM_PARAMETERS" value="uploadsFolder" />
+    <method v="2">
+      <option name="Make" enabled="true" />
+    </method>
+  </configuration>
+</component>
