@@ -1,7 +1,9 @@
 package bosonit.ejercicio_72.persona.dtos;
 
+import bosonit.ejercicio_72.asignaturas.Asignatura;
 import bosonit.ejercicio_72.profesor.Profesor;
 import bosonit.ejercicio_72.student.Student;
+import bosonit.ejercicio_72.student.dtos.output.StudentAsignaturasFullOutputDTO;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
@@ -28,7 +30,9 @@ public class PersonaProfesorFullOutputDTO implements Serializable {
     private String id_profesor;
     private String comments;
     private String branch;
-    private List<StudentAuxOutputDTO> students = new ArrayList<>();
+    private List<Asignatura> asignaturas = new ArrayList<>();
+    private List<StudentAsignaturasFullOutputDTO> students = new ArrayList<>();
+
     public PersonaProfesorFullOutputDTO(Profesor p) {
         if(p.getPersona()!=null) {
             this.id_persona = p.getPersona().getId_persona();
@@ -47,9 +51,11 @@ public class PersonaProfesorFullOutputDTO implements Serializable {
         this.id_profesor = p.getId_profesor();
         this.comments = p.getComments();
         this.branch = p.getBranch();
+        this.asignaturas=p.getAsignaturas();
         for(Student s : p.getStudents()){
-            StudentAuxOutputDTO aux = new StudentAuxOutputDTO(s);
+            StudentAsignaturasFullOutputDTO aux = new StudentAsignaturasFullOutputDTO(s);
             students.add(aux);
         }
+
     }
 }

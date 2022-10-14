@@ -1,5 +1,6 @@
 package bosonit.ejercicio_72.persona.repository;
 
+import bosonit.ejercicio_72.exceptions.UnprocessableEntityException;
 import bosonit.ejercicio_72.persona.Persona;
 import org.springframework.stereotype.Repository;
 
@@ -21,7 +22,7 @@ public class PersonaRepositoryImpl{
 
     public List<Persona> getData(HashMap<String,Object> condiciones,int numPage,int pageSize){
         CriteriaBuilder cb = entityManager.getCriteriaBuilder();
-        CriteriaQuery query = cb.createQuery(Persona.class);
+        CriteriaQuery<Persona> query = cb.createQuery(Persona.class);
         Root<Persona> root = query.from(Persona.class);
 
         SimpleDateFormat formater = new SimpleDateFormat("yyyy-MM-dd");
@@ -30,46 +31,40 @@ public class PersonaRepositoryImpl{
         List<Order> orderList = new ArrayList<>();
         condiciones.forEach((field,value)-> {
             switch (field){
-                case "usuario":
-                case "name":
-                case "surname":
+                case "usuario","name","surname":
                     predicates.add(cb.like(root.get(field),"%"+ value.toString()+"%"));
                     break;
                 case "created_date":
-                    String date_condition = condiciones.get("date_condition").toString();
-                    switch (date_condition){
+                    String dateCondition = condiciones.get("date_condition").toString();
+                    switch (dateCondition){
                         case "greater":
                             try {
                                 predicates.add(cb.greaterThan(root.<Date>get(field),formater.parse(value.toString())));
                             } catch (ParseException e) {
-                                throw new RuntimeException(e);
+                                throw new UnprocessableEntityException("Error al parsear la condicion de la fecha");
                             }
                             break;
                         case "less":
                             try {
                                 predicates.add(cb.lessThan(root.<Date>get(field),formater.parse(value.toString())));
                             } catch (ParseException e) {
-                                throw new RuntimeException(e);
+                                throw new UnprocessableEntityException("Error al parsear la condicion de la fecha");
                             }
                             break;
                         case "equal":
                             try {
                                 predicates.add(cb.equal(root.<Date>get(field), formater.parse(value.toString())));
                             } catch (ParseException e) {
-                                throw new RuntimeException(e);
+                                throw new UnprocessableEntityException("Error al parsear la condicion de la fecha");
                             }
                             break;
                     }
                     break;
                 case "order_by":
-                    String order_by = condiciones.get(field).toString();
-                    switch (order_by){
-                        case "name":
-                            orderList.add( cb.asc(root.get("name")));
-                            break;
-                        case "user":
-                            orderList.add( cb.asc(root.get("user")));
-                            break;
+                    String orderBy = condiciones.get(field).toString();
+                    switch (orderBy) {
+                        case "name" -> orderList.add(cb.asc(root.get("name")));
+                        case "user" -> orderList.add(cb.asc(root.get("user")));
                     }
                     break;
             }

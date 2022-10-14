@@ -1,5 +1,6 @@
 package bosonit.ejercicio_72.persona.dtos;
 
+import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
@@ -8,6 +9,7 @@ import java.util.Date;
 
 @Data
 @NoArgsConstructor
+@AllArgsConstructor
 public class PersonaInputDTO implements Serializable {
     private String usuario;
     private String password;
@@ -20,7 +22,4 @@ public class PersonaInputDTO implements Serializable {
     private Date created_date;
     private String imagen_url;
     private Date termination_date;
-    private String id_student;
-    private String id_profesor;
-
 }

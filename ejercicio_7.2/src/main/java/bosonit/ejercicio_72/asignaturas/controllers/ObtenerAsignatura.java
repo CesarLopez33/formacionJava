@@ -1,6 +1,6 @@
 package bosonit.ejercicio_72.asignaturas.controllers;
 
-import bosonit.ejercicio_72.asignaturas.Estudiante_asignatura;
+import bosonit.ejercicio_72.asignaturas.dtos.AsignaturaOutputDTO;
 import bosonit.ejercicio_72.asignaturas.service.AsignaturaService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -17,12 +17,12 @@ public class ObtenerAsignatura {
     AsignaturaService as;
 
     @GetMapping("/{id}")
-    Estudiante_asignatura obtenerAsignatura(@PathVariable String id){
+    AsignaturaOutputDTO obtenerAsignatura(@PathVariable String id){
         return as.obtenerAsignatura(id);
     }
 
     @GetMapping("/student/{id}")
-    ResponseEntity obtenerAsignaturasStudent(@PathVariable String id){
-        return new ResponseEntity(as.obtenerAsignaturasStudent(id), HttpStatus.OK);
+    ResponseEntity<Object> obtenerAsignaturasStudent(@PathVariable String id){
+        return new ResponseEntity<>(as.obtenerAsignaturasStudent(id), HttpStatus.OK);
     }
 }

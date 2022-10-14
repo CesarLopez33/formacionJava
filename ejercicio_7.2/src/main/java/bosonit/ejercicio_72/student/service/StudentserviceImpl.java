@@ -5,18 +5,17 @@ import bosonit.ejercicio_72.exceptions.UnprocessableEntityException;
 import bosonit.ejercicio_72.persona.Persona;
 import bosonit.ejercicio_72.persona.repository.PersonaRepository;
 import bosonit.ejercicio_72.profesor.repository.ProfesorRepository;
-import bosonit.ejercicio_72.student.dtos.IdsAsignaturasInputDTO;
-import bosonit.ejercicio_72.student.dtos.StudentInputDTO;
+import bosonit.ejercicio_72.student.dtos.input.IdsAsignaturasInputDTO;
+import bosonit.ejercicio_72.student.dtos.input.StudentInputDTO;
 import bosonit.ejercicio_72.student.Student;
-import bosonit.ejercicio_72.student.dtos.StudentOutputDTO;
-import bosonit.ejercicio_72.student.dtos.StudentPersonaOutputDTO;
+import bosonit.ejercicio_72.student.dtos.output.StudentOutputDTO;
+import bosonit.ejercicio_72.student.dtos.output.StudentPersonaOutputDTO;
 import bosonit.ejercicio_72.student.repository.StudentRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.stereotype.Service;
 
 import javax.persistence.EntityNotFoundException;
-import java.util.List;
 
 @Service
 public class StudentserviceImpl implements StudentService {
@@ -79,29 +78,19 @@ public class StudentserviceImpl implements StudentService {
     }
 
     @Override
-    public Student obtenerStudentPorNombre(String nombre) {
-        return null;
-    }
-
-    @Override
-    public List<Student> obtenerTodasStudents() {
-        return null;
-    }
-
-    @Override
-    public void addAsignaturas(String id, IdsAsignaturasInputDTO ids_asig) {
+    public void addAsignaturas(String id, IdsAsignaturasInputDTO idsAsig) {
         Student student = studentRepository.findById(id).orElseThrow(() -> new EntityNotFoundException(
                 "No se ha encontrado al estudiante con id: "+ id));
-        ids_asig.getIds().forEach(idAsig-> student.getAsignaturas().add(asignaturaRepository.findById(idAsig)
+        idsAsig.getIds().forEach(idAsig-> student.getAsignaturas().add(asignaturaRepository.findById(idAsig)
                 .orElseThrow(()-> new EntityNotFoundException("No se ha encontrado asignatura con id: "+idAsig))));
         studentRepository.save(student);
     }
 
     @Override
-    public void deleteAsignaturas(String id, IdsAsignaturasInputDTO ids_asig) {
+    public void deleteAsignaturas(String id, IdsAsignaturasInputDTO idsAsig) {
         Student student = studentRepository.findById(id).orElseThrow(() -> new EntityNotFoundException(
                 "No se ha encontrado al estudiante con id: "+ id));
-        ids_asig.getIds().forEach(idAsig-> student.getAsignaturas().remove(asignaturaRepository.findById(idAsig)
+        idsAsig.getIds().forEach(idAsig-> student.getAsignaturas().remove(asignaturaRepository.findById(idAsig)
                 .orElseThrow(()-> new EntityNotFoundException("No se ha encontrado asignatura con id: "+idAsig))));
         studentRepository.save(student);
     }

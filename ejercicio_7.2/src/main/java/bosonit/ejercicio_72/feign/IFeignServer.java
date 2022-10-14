@@ -1,6 +1,6 @@
 package bosonit.ejercicio_72.feign;
 
-import bosonit.ejercicio_72.profesor.dtos.ProfesorOutputDTO;
+import bosonit.ejercicio_72.profesor.dtos.output.ProfesorOutputDTO;
 import org.springframework.cloud.openfeign.FeignClient;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;

@@ -8,10 +8,10 @@ import bosonit.ejercicio_72.persona.dtos.PersonaProfesorFullOutputDTO;
 import bosonit.ejercicio_72.persona.dtos.PersonaStudentFullOutputDTO;
 import bosonit.ejercicio_72.persona.repository.PersonaRepository;
 import bosonit.ejercicio_72.profesor.Profesor;
-import bosonit.ejercicio_72.profesor.dtos.ProfesorPersonaOutputDTO;
+import bosonit.ejercicio_72.profesor.dtos.output.ProfesorPersonaOutputDTO;
 import bosonit.ejercicio_72.profesor.repository.ProfesorRepository;
 import bosonit.ejercicio_72.student.Student;
-import bosonit.ejercicio_72.student.dtos.StudentPersonaOutputDTO;
+import bosonit.ejercicio_72.student.dtos.output.StudentPersonaOutputDTO;
 import bosonit.ejercicio_72.student.repository.StudentRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.EmptyResultDataAccessException;
@@ -24,7 +24,6 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Optional;
-import java.util.stream.Collectors;
 
 @Service
 public class PersonaServiceImpl implements PersonaService {
@@ -40,12 +39,6 @@ public class PersonaServiceImpl implements PersonaService {
     public PersonaOutputDTO crearPersona(PersonaInputDTO persona){
         compruebaCampos(persona);
         Persona p = new Persona(persona);
-        if(persona.getId_student()!=null)
-            p.setStudent(studentRepository.findById(persona.getId_student()).orElseThrow(()->
-                new EntityNotFoundException("No se ha encontrado estudiante con id "+persona.getId_student())));
-        if(persona.getId_profesor()!=null)
-            p.setProfesor(profesorRepository.findById(persona.getId_profesor()).orElseThrow(()->
-                new EntityNotFoundException("No se ha encontrado profesor con id "+persona.getId_profesor())));
         personaRepository.save(p);
         return new PersonaOutputDTO(p);
     }
@@ -87,13 +80,13 @@ public class PersonaServiceImpl implements PersonaService {
     }
 
     @Override
-    public ResponseEntity obtenerPersonaConTodo(Integer id) {
+    public ResponseEntity<Object> obtenerPersonaConTodo(Integer id) {
         Persona persona = personaRepository.findById(id).orElseThrow(() -> new EntityNotFoundException(
                 "No se ha encontrado a la persona con id: "+ id));
         Optional<Student> student = studentRepository.findByPersona(persona);
-        if(student.isPresent()) return new ResponseEntity(new PersonaStudentFullOutputDTO(student.get()), HttpStatus.OK);
+        if(student.isPresent()) return new ResponseEntity<>(new PersonaStudentFullOutputDTO(student.get()), HttpStatus.OK);
         Optional<Profesor> profesor = profesorRepository.findByPersona(persona);
-        if(profesor.isPresent()) return new ResponseEntity(new PersonaProfesorFullOutputDTO(profesor.get()),HttpStatus.OK);
+        if(profesor.isPresent()) return new ResponseEntity<>(new PersonaProfesorFullOutputDTO(profesor.get()),HttpStatus.OK);
         throw new EntityNotFoundException("La persona no tiene ni estudiante ni profesor asociados");
     }
 
@@ -101,49 +94,49 @@ public class PersonaServiceImpl implements PersonaService {
     public List<PersonaOutputDTO> obtenerPersonaPorNombre(String nombre){
         List<Persona> p = personaRepository.findByName(nombre);
         if(p.isEmpty()) throw new EntityNotFoundException("No se ha encontrado a la persona con nombre: "+ nombre);
-        else return p.stream().map(person->new PersonaOutputDTO(person)).collect(Collectors.toList());
+        else return p.stream().map(PersonaOutputDTO::new).toList();
     }
 
     @Override
-    public ResponseEntity obtenerPersonaPorNombreConTodo(String nombre) {
+    public ResponseEntity<Object> obtenerPersonaPorNombreConTodo(String nombre) {
         List<Persona> personas = personaRepository.findByName(nombre);
         if(personas.isEmpty()) throw new EntityNotFoundException("No se han encontrado personas con nombre: "+ nombre);
         ArrayList<Object> datos = new ArrayList<>();
         for(Persona p : personas){
             Optional<Student> student = studentRepository.findByPersona(p);
             Optional<Profesor> profesor = profesorRepository.findByPersona(p);
-            if(student.isPresent()) datos.add(new StudentPersonaOutputDTO(student.get()));
-            else if(profesor.isPresent()) datos.add(new ProfesorPersonaOutputDTO(profesor.get()));
+            if(student.isPresent()) datos.add(new PersonaStudentFullOutputDTO(student.get()));
+            else if(profesor.isPresent()) datos.add(new PersonaProfesorFullOutputDTO(profesor.get()));
             else datos.add(p);
         }
-        return new ResponseEntity(datos,HttpStatus.OK);
+        return new ResponseEntity<>(datos,HttpStatus.OK);
     }
 
     @Override
     public List<PersonaOutputDTO> obtenerTodasPersonas() {
-        ArrayList personas = new ArrayList<>();
+        ArrayList<PersonaOutputDTO> personas = new ArrayList<>();
         personaRepository.findAll().forEach(p->personas.add(new PersonaOutputDTO(p)));
         return personas;
     }
 
     @Override
-    public ResponseEntity obtenerTodasPersonaConTodo() {
+    public ResponseEntity<Object> obtenerTodasPersonaConTodo() {
         List<Persona> personas = personaRepository.findAll();
         if(personas.isEmpty()) throw new EntityNotFoundException("No hay personas en la base de datos");
         ArrayList<Object> datos = new ArrayList<>();
         for(Persona p : personas){
             Optional<Student> student = studentRepository.findByPersona(p);
             Optional<Profesor> profesor = profesorRepository.findByPersona(p);
-            if(student.isPresent()) datos.add(new StudentPersonaOutputDTO(student.get()));
-            else if(profesor.isPresent()) datos.add(new ProfesorPersonaOutputDTO(profesor.get()));
+            if(student.isPresent()) datos.add(new PersonaStudentFullOutputDTO(student.get()));
+            else if(profesor.isPresent()) datos.add(new PersonaProfesorFullOutputDTO(profesor.get()));
             else datos.add(p);
         }
-        return new ResponseEntity(datos,HttpStatus.OK);
+        return new ResponseEntity<>(datos,HttpStatus.OK);
     }
 
     @Override
     public List<PersonaOutputDTO> obtenerPersonaPorCriterio(HashMap<String, Object> condiciones, int numPage, int pageSize) {
-        return personaRepository.getData(condiciones, numPage, pageSize).stream().map(p-> new PersonaOutputDTO(p)).toList();
+        return personaRepository.getData(condiciones, numPage, pageSize).stream().map(PersonaOutputDTO::new).toList();
     }
 
     private static void compruebaCampos(PersonaInputDTO p){
@@ -157,7 +150,5 @@ public class PersonaServiceImpl implements PersonaService {
         if(p.getCity()==null){throw new UnprocessableEntityException("City no puede ser nulo");}
         if(p.getActive()==null){throw new UnprocessableEntityException("Campo active no puede ser nulo");}
         if(p.getCreated_date()==null){throw new UnprocessableEntityException("Created_date no puede ser nulo");}
-        if(p.getId_profesor()!=null && p.getId_student()!=null)
-            throw new UnprocessableEntityException("Una persona no puede ser estudiante y profesor a la vez");
     }
 }

@@ -1,7 +1,7 @@
 package bosonit.ejercicio_72.persona.dtos;
 
-import bosonit.ejercicio_72.asignaturas.Estudiante_asignatura;
-import bosonit.ejercicio_72.profesor.dtos.ProfesorOutputDTO;
+import bosonit.ejercicio_72.asignaturas.Asignatura;
+import bosonit.ejercicio_72.profesor.dtos.output.ProfesorOutputDTO;
 import bosonit.ejercicio_72.student.Student;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -29,7 +29,7 @@ public class PersonaStudentFullOutputDTO implements Serializable {
     private Integer num_hours_week;
     private String coments;
     private ProfesorOutputDTO profesor;
-    private List<Estudiante_asignatura> asignaturas;
+    private List<Asignatura> asignaturas;
 
     public PersonaStudentFullOutputDTO(Student s) {
         if (s.getPersona() != null) {

@@ -1,7 +1,8 @@
 package bosonit.ejercicio_72.profesor;
 
+import bosonit.ejercicio_72.asignaturas.Asignatura;
 import bosonit.ejercicio_72.persona.Persona;
-import bosonit.ejercicio_72.profesor.dtos.ProfesorInputDTO;
+import bosonit.ejercicio_72.profesor.dtos.input.ProfesorInputDTO;
 import bosonit.ejercicio_72.student.Student;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 import lombok.Data;
@@ -18,7 +19,7 @@ import java.util.List;
 public class Profesor implements java.io.Serializable {
     @Id
     @GeneratedValue(generator = "sequence-generator")
-    @GenericGenerator(name = "sequence-generator", strategy = "bosonit.ejercicio_72.generadorIds.MiGenerador")
+    @GenericGenerator(name = "sequence-generator", strategy = "bosonit.ejercicio_72.generadorids.MiGenerador")
     private String id_profesor;
     @OneToOne(fetch = FetchType.LAZY,optional = false)
     @JoinColumn(name="id_persona")
@@ -30,6 +31,8 @@ public class Profesor implements java.io.Serializable {
     private String branch;
     @OneToMany(mappedBy = "profesor",fetch = FetchType.LAZY)
     private List<Student> students;
+    @OneToMany(mappedBy = "profesor",fetch = FetchType.LAZY)
+    private List<Asignatura> asignaturas;
 
     public Profesor(ProfesorInputDTO p) {
         this.comments = p.getComments();

@@ -1,8 +1,8 @@
 package bosonit.ejercicio_72.profesor.service;
 
-import bosonit.ejercicio_72.profesor.dtos.ProfesorInputDTO;
-import bosonit.ejercicio_72.profesor.dtos.ProfesorOutputDTO;
-import bosonit.ejercicio_72.profesor.dtos.ProfesorPersonaOutputDTO;
+import bosonit.ejercicio_72.profesor.dtos.input.ProfesorInputDTO;
+import bosonit.ejercicio_72.profesor.dtos.output.ProfesorOutputDTO;
+import bosonit.ejercicio_72.profesor.dtos.output.ProfesorPersonaOutputDTO;
 
 public interface ProfesorService {
     ProfesorOutputDTO crearProfesor(ProfesorInputDTO profesor);

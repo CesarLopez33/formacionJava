@@ -13,11 +13,11 @@ public interface PersonaService {
     PersonaOutputDTO actualizarPersona(Integer id,PersonaInputDTO persona);
     void eliminarPersona(Integer id);
     PersonaOutputDTO obtenerPersona(Integer id);
-    ResponseEntity obtenerPersonaConTodo(Integer id);
+    ResponseEntity<Object> obtenerPersonaConTodo(Integer id);
     List<PersonaOutputDTO> obtenerPersonaPorNombre(String nombre);
-    ResponseEntity obtenerPersonaPorNombreConTodo(String nombre);
+    ResponseEntity<Object> obtenerPersonaPorNombreConTodo(String nombre);
     List<PersonaOutputDTO> obtenerTodasPersonas();
-    ResponseEntity obtenerTodasPersonaConTodo();
+    ResponseEntity<Object> obtenerTodasPersonaConTodo();
 
     List<PersonaOutputDTO> obtenerPersonaPorCriterio(HashMap<String, Object> condiciones,int numPage,int pageSize);
 }
