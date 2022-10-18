@@ -1,5 +1,6 @@
 package bosonit.ejercicio_72.persona.tests;
 
+import bosonit.ejercicio_72.exceptions.CustomError;
 import bosonit.ejercicio_72.persona.dtos.PersonaInputDTO;
 import bosonit.ejercicio_72.persona.dtos.PersonaOutputDTO;
 
@@ -53,11 +54,71 @@ class CrearPersonaTest {
         Assertions.assertEquals("Perez", Objects.requireNonNull(result.getBody()).getName());
     }
 
+    @Test
+    void crearPersonaBadInputTest() throws URISyntaxException {
+        final String baseUrl = "http://localhost:"+randomServerPort+"/persona/";
+        URI uri = new URI(baseUrl);
+        HttpHeaders headers = new HttpHeaders();
+        PersonaInputDTO persona = new PersonaInputDTO();
 
+        HttpEntity<PersonaInputDTO> request = new HttpEntity<>(persona,headers);
+        ResponseEntity<CustomError> result = this.testRestTemplate.postForEntity(uri, request, CustomError.class);
+        Assertions.assertEquals(422, result.getStatusCodeValue());
 
+        persona.setUsuario("aaa");
 
+        request = new HttpEntity<>(persona,headers);
+        result = this.testRestTemplate.postForEntity(uri, request, CustomError.class);
+        Assertions.assertEquals(422, result.getStatusCodeValue());
 
+        persona.setUsuario("aaaaaaaaaaa");
 
+        request = new HttpEntity<>(persona,headers);
+        result = this.testRestTemplate.postForEntity(uri, request, CustomError.class);
+        Assertions.assertEquals(422, result.getStatusCodeValue());
+
+        persona.setUsuario("Juaness");
+
+        request = new HttpEntity<>(persona,headers);
+        result = this.testRestTemplate.postForEntity(uri, request, CustomError.class);
+        Assertions.assertEquals(422, result.getStatusCodeValue());
+
+        persona.setPassword("abc123");
+
+        request = new HttpEntity<>(persona,headers);
+        result = this.testRestTemplate.postForEntity(uri, request, CustomError.class);
+        Assertions.assertEquals(422, result.getStatusCodeValue());
+
+        persona.setName("Sergio");
+
+        request = new HttpEntity<>(persona,headers);
+        result = this.testRestTemplate.postForEntity(uri, request, CustomError.class);
+        Assertions.assertEquals(422, result.getStatusCodeValue());
+
+        persona.setCompany_email("Sergio");
+
+        request = new HttpEntity<>(persona,headers);
+        result = this.testRestTemplate.postForEntity(uri, request, CustomError.class);
+        Assertions.assertEquals(422, result.getStatusCodeValue());
+
+        persona.setPersonal_email("Sergio");
+
+        request = new HttpEntity<>(persona,headers);
+        result = this.testRestTemplate.postForEntity(uri, request, CustomError.class);
+        Assertions.assertEquals(422, result.getStatusCodeValue());
+
+        persona.setCity("Sergio");
+
+        request = new HttpEntity<>(persona,headers);
+        result = this.testRestTemplate.postForEntity(uri, request, CustomError.class);
+        Assertions.assertEquals(422, result.getStatusCodeValue());
+
+        persona.setActive(Boolean.TRUE);
+
+        request = new HttpEntity<>(persona,headers);
+        result = this.testRestTemplate.postForEntity(uri, request, CustomError.class);
+        Assertions.assertEquals(422, result.getStatusCodeValue());
+    }
 
 
 }

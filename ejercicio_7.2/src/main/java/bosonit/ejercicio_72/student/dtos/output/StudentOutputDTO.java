@@ -17,10 +17,10 @@ public class StudentOutputDTO {
 
     public StudentOutputDTO(Student s){
         this.id_student = s.getId_student();
-        if(s.getPersona()!=null)  this.id_persona = s.getPersona().getId_persona();
+        this.id_persona = s.getPersona().getId_persona();
         this.num_hours_week = s.getNum_hours_week();
         this.comments = s.getComments();
-        if(s.getProfesor()!=null) this.id_profesor = s.getProfesor().getId_profesor();
+        this.id_profesor = s.getProfesor().getId_profesor();
         this.branch = s.getBranch();
     }
 }

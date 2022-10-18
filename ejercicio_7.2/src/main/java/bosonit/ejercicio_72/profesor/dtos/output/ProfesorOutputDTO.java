@@ -16,7 +16,7 @@ public class ProfesorOutputDTO implements Serializable {
 
     public ProfesorOutputDTO(Profesor p) {
         this.id_profesor = p.getId_profesor();
-        if(p.getPersona()!=null) this.id_persona = p.getPersona().getId_persona();
+        this.id_persona = p.getPersona().getId_persona();
         this.comments = p.getComments();
         this.branch = p.getBranch();
     }

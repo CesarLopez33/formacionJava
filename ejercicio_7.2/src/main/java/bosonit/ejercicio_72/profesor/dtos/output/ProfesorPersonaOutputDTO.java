@@ -29,19 +29,17 @@ public class ProfesorPersonaOutputDTO {
         this.id_profesor = p.getId_profesor();
         this.comments = p.getComments();
         this.branch = p.getBranch();
-        if(p.getPersona()!=null) {
-            this.id_persona = p.getPersona().getId_persona();
-            this.usuario = p.getPersona().getUsuario();
-            this.password = p.getPersona().getPassword();
-            this.name = p.getPersona().getName();
-            this.surname = p.getPersona().getSurname();
-            this.company_email = p.getPersona().getCompany_email();
-            this.personal_email = p.getPersona().getPersonal_email();
-            this.city = p.getPersona().getCity();
-            this.active = p.getPersona().getActive();
-            this.created_date = p.getPersona().getCreated_date();
-            this.imagen_url = p.getPersona().getImagen_url();
-            this.termination_date = p.getPersona().getTermination_date();
-        }
+        this.id_persona = p.getPersona().getId_persona();
+        this.usuario = p.getPersona().getUsuario();
+        this.password = p.getPersona().getPassword();
+        this.name = p.getPersona().getName();
+        this.surname = p.getPersona().getSurname();
+        this.company_email = p.getPersona().getCompany_email();
+        this.personal_email = p.getPersona().getPersonal_email();
+        this.city = p.getPersona().getCity();
+        this.active = p.getPersona().getActive();
+        this.created_date = p.getPersona().getCreated_date();
+        this.imagen_url = p.getPersona().getImagen_url();
+        this.termination_date = p.getPersona().getTermination_date();
     }
 }

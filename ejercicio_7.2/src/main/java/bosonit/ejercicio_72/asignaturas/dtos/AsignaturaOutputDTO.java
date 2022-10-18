@@ -3,11 +3,13 @@ package bosonit.ejercicio_72.asignaturas.dtos;
 import bosonit.ejercicio_72.asignaturas.Asignatura;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+
+import java.io.Serializable;
 import java.util.Date;
 
 @Data
 @NoArgsConstructor
-public class AsignaturaOutputDTO {
+public class AsignaturaOutputDTO implements Serializable {
     private String asignatura;
     private String comments;
     private Date initial_date;

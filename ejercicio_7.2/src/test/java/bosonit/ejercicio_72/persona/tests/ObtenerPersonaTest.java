@@ -43,7 +43,6 @@ class ObtenerPersonaTest {
                 "asdasdasd.com",
                 new Date(2003-11-23));
         personaRepository.save(new Persona(persona));
-        System.out.println("AAAAAAAAA");
     }
 
     @Test
@@ -103,4 +102,27 @@ class ObtenerPersonaTest {
         Assertions.assertEquals(200, result.getStatusCodeValue());
         Assertions.assertEquals("aaa",result.getBody()[0].getSurname());
     }
+
+    @Test
+    void obtenerPersonaIdBadRequest() throws URISyntaxException {
+        final String baseUrl = "http://localhost:"+randomServerPort+"/persona/"+8+"?outputType=salsa";
+        URI uri = new URI(baseUrl);
+        ResponseEntity<Void> result = this.testRestTemplate.getForEntity(uri, Void.class);
+        Assertions.assertEquals(400, result.getStatusCodeValue());
+    }
+    @Test
+    void obtenerPersonaNombreBadRequest() throws URISyntaxException {
+        final String baseUrl = "http://localhost:"+randomServerPort+"/persona/nombre/a?outputType=salsa";
+        URI uri = new URI(baseUrl);
+        ResponseEntity<Void> result = this.testRestTemplate.getForEntity(uri, Void.class);
+        Assertions.assertEquals(400, result.getStatusCodeValue());
+    }
+    @Test
+    void obtenerPersonaTodasBadRequest() throws URISyntaxException {
+        final String baseUrl = "http://localhost:"+randomServerPort+"/persona/all?outputType=salsa";
+        URI uri = new URI(baseUrl);
+        ResponseEntity<Void> result = this.testRestTemplate.getForEntity(uri, Void.class);
+        Assertions.assertEquals(400, result.getStatusCodeValue());
+    }
+
 }

@@ -9,6 +9,7 @@ import lombok.NoArgsConstructor;
 import org.hibernate.annotations.GenericGenerator;
 
 import javax.persistence.*;
+import java.io.Serializable;
 import java.util.Date;
 import java.util.List;
 
@@ -16,7 +17,7 @@ import java.util.List;
 @Entity
 @Table(name = "asignaturas")
 @NoArgsConstructor
-public class Asignatura implements java.io.Serializable {
+public class Asignatura implements Serializable {
     @Id
     @GeneratedValue(generator = "sequence-generator")
     @GenericGenerator(name = "sequence-generator", strategy = "bosonit.ejercicio_72.generadorids.MiGenerador")

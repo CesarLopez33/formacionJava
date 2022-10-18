@@ -30,23 +30,23 @@ public class PersonaRepositoryImpl{
         List<Predicate> predicates = new ArrayList<>();
         List<Order> orderList = new ArrayList<>();
         condiciones.forEach((field,value)-> {
-            switch (field){
-                case "usuario","name","surname":
-                    predicates.add(cb.like(root.get(field),"%"+ value.toString()+"%"));
+            switch (field) {
+                case "usuario", "name", "surname":
+                    predicates.add(cb.like(root.get(field), "%" + value.toString() + "%"));
                     break;
                 case "created_date":
                     String dateCondition = condiciones.get("date_condition").toString();
-                    switch (dateCondition){
+                    switch (dateCondition) {
                         case "greater":
                             try {
-                                predicates.add(cb.greaterThan(root.<Date>get(field),formater.parse(value.toString())));
+                                predicates.add(cb.greaterThan(root.<Date>get(field), formater.parse(value.toString())));
                             } catch (ParseException e) {
                                 throw new UnprocessableEntityException("Error al parsear la condicion de la fecha");
                             }
                             break;
                         case "less":
                             try {
-                                predicates.add(cb.lessThan(root.<Date>get(field),formater.parse(value.toString())));
+                                predicates.add(cb.lessThan(root.<Date>get(field), formater.parse(value.toString())));
                             } catch (ParseException e) {
                                 throw new UnprocessableEntityException("Error al parsear la condicion de la fecha");
                             }
@@ -62,10 +62,10 @@ public class PersonaRepositoryImpl{
                     break;
                 case "order_by":
                     String orderBy = condiciones.get(field).toString();
-                    switch (orderBy) {
-                        case "name" -> orderList.add(cb.asc(root.get("name")));
-                        case "user" -> orderList.add(cb.asc(root.get("user")));
-                    }
+                    if (orderBy.equalsIgnoreCase("name"))
+                        orderList.add(cb.asc(root.get("name")));
+                    if (orderBy.equalsIgnoreCase("user"))
+                        orderList.add(cb.asc(root.get("usuario")));
                     break;
             }
         });

@@ -6,11 +6,10 @@ import lombok.NoArgsConstructor;
 
 import java.time.LocalDate;
 import java.time.ZoneId;
-import java.util.Date;
 
 @Data
 @NoArgsConstructor
-public class PersonaOutputDTO {
+public class PersonaCorsOutputDTO {
     private String usuario;
     private String password;
     private String name;
@@ -19,11 +18,11 @@ public class PersonaOutputDTO {
     private String personal_email;
     private String city;
     private Boolean active;
-    private Date created_date;
+    private LocalDate created_date;
     private String imagen_url;
-    private Date termination_date;
+    private LocalDate termination_date;
 
-    public PersonaOutputDTO(Persona p) {
+    public PersonaCorsOutputDTO(PersonaOutputDTO p) {
         this.usuario = p.getUsuario();
         this.password = p.getPassword();
         this.name = p.getName();
@@ -32,8 +31,8 @@ public class PersonaOutputDTO {
         this.personal_email = p.getPersonal_email();
         this.city = p.getCity();
         this.active = p.getActive();
-        this.created_date = p.getCreated_date();
+        this.created_date = p.getCreated_date().toInstant().atZone(ZoneId.systemDefault()).toLocalDate();
         this.imagen_url = p.getImagen_url();
-        this.termination_date = p.getTermination_date();
+        this.termination_date = p.getTermination_date().toInstant().atZone(ZoneId.systemDefault()).toLocalDate();
     }
 }

@@ -63,9 +63,9 @@ public class AsignaturaServiceImpl implements AsignaturaService{
     }
 
     @Override
-    public List<Asignatura> obtenerAsignaturasStudent(String id) {
+    public List<AsignaturaOutputDTO> obtenerAsignaturasStudent(String id) {
         Student s = studentRepository.findById(id)
                 .orElseThrow(()->new EntityNotFoundException("No se ha encontrado al estudiante con id: "+ id));
-        return s.getAsignaturas();
+        return s.getAsignaturas().stream().map(AsignaturaOutputDTO::new).toList();
     }
 }

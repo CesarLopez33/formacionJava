@@ -8,10 +8,8 @@ import bosonit.ejercicio_72.persona.dtos.PersonaProfesorFullOutputDTO;
 import bosonit.ejercicio_72.persona.dtos.PersonaStudentFullOutputDTO;
 import bosonit.ejercicio_72.persona.repository.PersonaRepository;
 import bosonit.ejercicio_72.profesor.Profesor;
-import bosonit.ejercicio_72.profesor.dtos.output.ProfesorPersonaOutputDTO;
 import bosonit.ejercicio_72.profesor.repository.ProfesorRepository;
 import bosonit.ejercicio_72.student.Student;
-import bosonit.ejercicio_72.student.dtos.output.StudentPersonaOutputDTO;
 import bosonit.ejercicio_72.student.repository.StudentRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.EmptyResultDataAccessException;
@@ -50,8 +48,8 @@ public class PersonaServiceImpl implements PersonaService {
                 "No se ha encontrado a la persona con id: "+ id));
 
         if(persona.getUsuario()!=null){
-            if(p.getUsuario().length()>10){throw new UnprocessableEntityException("Longitud usuario no puede ser superior a 10");}
-            if(p.getUsuario().length()<6){throw new UnprocessableEntityException("Longitud de usuario no puede ser inferior a 6");}
+            if(persona.getUsuario().length()>10){throw new UnprocessableEntityException("Longitud usuario no puede ser superior a 10");}
+            if(persona.getUsuario().length()<6){throw new UnprocessableEntityException("Longitud de usuario no puede ser inferior a 6");}
         }
         if(persona.getPassword()!=null){p.setPassword(persona.getPassword());}
         if(persona.getName()!=null){p.setName(persona.getName());}

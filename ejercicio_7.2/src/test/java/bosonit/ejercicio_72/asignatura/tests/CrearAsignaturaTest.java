@@ -8,9 +8,6 @@ import bosonit.ejercicio_72.persona.repository.PersonaRepository;
 import bosonit.ejercicio_72.profesor.Profesor;
 import bosonit.ejercicio_72.profesor.dtos.input.ProfesorInputDTO;
 import bosonit.ejercicio_72.profesor.repository.ProfesorRepository;
-import bosonit.ejercicio_72.student.dtos.input.StudentInputDTO;
-import bosonit.ejercicio_72.student.dtos.output.StudentOutputDTO;
-import bosonit.ejercicio_72.student.repository.StudentRepository;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
@@ -49,11 +46,6 @@ class CrearAsignaturaTest {
                 new Date(2001-12-27), "asdasdasd.com", new Date(2003-11-23)
         ));
         persona = personaRepository.save(persona);
-        Persona persona2 = new Persona(new PersonaInputDTO("Juanes", "Manuel", "Perez",
-                "aaa", "asdasdasd", "asdasdasd2", "Madrid", true,
-                new Date(2001-12-27), "asdasdasd.com", new Date(2003-11-23)
-        ));
-        personaRepository.save(persona2);
 
         Profesor profesor = new Profesor(new ProfesorInputDTO(
                 1,"Le falta un brazo","mates")

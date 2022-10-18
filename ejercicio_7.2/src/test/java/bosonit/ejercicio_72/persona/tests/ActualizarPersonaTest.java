@@ -1,5 +1,6 @@
 package bosonit.ejercicio_72.persona.tests;
 
+import bosonit.ejercicio_72.exceptions.CustomError;
 import bosonit.ejercicio_72.persona.Persona;
 import bosonit.ejercicio_72.persona.dtos.PersonaInputDTO;
 import bosonit.ejercicio_72.persona.dtos.PersonaOutputDTO;
@@ -73,5 +74,30 @@ class ActualizarPersonaTest {
         //Verify request succeed
         Assertions.assertEquals(200, result.getStatusCodeValue());
         Assertions.assertEquals("miguel", Objects.requireNonNull(result.getBody()).getName());
+    }
+
+    @Test
+    void atualizarPersonaBadInputTest() throws URISyntaxException {
+        final String baseUrl = "http://localhost:"+randomServerPort+"/persona/1";
+        URI uri = new URI(baseUrl);
+        HttpHeaders headers = new HttpHeaders();
+        PersonaInputDTO persona = new PersonaInputDTO();
+
+        HttpEntity<PersonaInputDTO> request = new HttpEntity<>(persona,headers);
+        ResponseEntity<CustomError> result =
+                this.testRestTemplate.exchange(uri,HttpMethod.PUT, request, CustomError.class);
+        Assertions.assertEquals(200, result.getStatusCodeValue());
+
+        persona.setUsuario("aaaaaaaaaaa");
+
+        request = new HttpEntity<>(persona,headers);
+        result = this.testRestTemplate.exchange(uri,HttpMethod.PUT, request, CustomError.class);
+        Assertions.assertEquals(422, result.getStatusCodeValue());
+
+        persona.setUsuario("aaa");
+
+        request = new HttpEntity<>(persona,headers);
+        result = this.testRestTemplate.exchange(uri,HttpMethod.PUT, request, CustomError.class);
+        Assertions.assertEquals(422, result.getStatusCodeValue());
     }
 }

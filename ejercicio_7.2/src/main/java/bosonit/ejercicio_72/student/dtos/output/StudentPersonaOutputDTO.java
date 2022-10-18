@@ -32,19 +32,17 @@ public class StudentPersonaOutputDTO implements Serializable {
         this.num_hours_week = s.getNum_hours_week();
         this.coments = s.getComments();
         this.branch = s.getBranch();
-        if(s.getPersona()!=null) {
-            this.id_persona = s.getPersona().getId_persona();
-            this.user = s.getPersona().getUsuario();
-            this.password = s.getPersona().getPassword();
-            this.name = s.getPersona().getName();
-            this.surname = s.getPersona().getSurname();
-            this.company_email = s.getPersona().getCompany_email();
-            this.personal_email = s.getPersona().getPersonal_email();
-            this.city = s.getPersona().getCity();
-            this.active = s.getPersona().getActive();
-            this.created_date = s.getPersona().getCreated_date();
-            this.imagen_url = s.getPersona().getImagen_url();
-            this.termination_date = s.getPersona().getTermination_date();
-        }
+        this.id_persona = s.getPersona().getId_persona();
+        this.user = s.getPersona().getUsuario();
+        this.password = s.getPersona().getPassword();
+        this.name = s.getPersona().getName();
+        this.surname = s.getPersona().getSurname();
+        this.company_email = s.getPersona().getCompany_email();
+        this.personal_email = s.getPersona().getPersonal_email();
+        this.city = s.getPersona().getCity();
+        this.active = s.getPersona().getActive();
+        this.created_date = s.getPersona().getCreated_date();
+        this.imagen_url = s.getPersona().getImagen_url();
+        this.termination_date = s.getPersona().getTermination_date();
     }
 }

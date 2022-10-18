@@ -87,4 +87,12 @@ class ObtenerStudentTest {
         Assertions.assertEquals("Front", Objects.requireNonNull(result.getBody()).getBranch());
         Assertions.assertEquals("asdasdasd", result.getBody().getCompany_email());
     }
+    @Test
+    void obtenerStudentBadRequestTest() throws URISyntaxException {
+        final String baseUrl = "http://localhost:"+randomServerPort+"/student/"+1+"?outputType=savage";
+        URI uri = new URI(baseUrl);
+
+        ResponseEntity<String> result = this.testRestTemplate.getForEntity(uri,String.class);
+        Assertions.assertEquals(400, result.getStatusCodeValue());
+    }
 }

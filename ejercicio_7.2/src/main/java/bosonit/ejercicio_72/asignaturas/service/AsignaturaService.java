@@ -12,5 +12,5 @@ public interface AsignaturaService {
     void eliminarAsignatura(String id);
     AsignaturaOutputDTO obtenerAsignatura(String id);
 
-    List<Asignatura> obtenerAsignaturasStudent(String id);
+    List<AsignaturaOutputDTO> obtenerAsignaturasStudent(String id);
 }
