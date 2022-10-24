@@ -11,10 +11,12 @@ import bosonit.ejercicio_72.profesor.Profesor;
 import bosonit.ejercicio_72.profesor.repository.ProfesorRepository;
 import bosonit.ejercicio_72.student.Student;
 import bosonit.ejercicio_72.student.repository.StudentRepository;
+import lombok.AllArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import javax.persistence.EntityNotFoundException;
@@ -31,10 +33,13 @@ public class PersonaServiceImpl implements PersonaService {
     StudentRepository studentRepository;
     @Autowired
     ProfesorRepository profesorRepository;
+    @Autowired
+    PasswordEncoder passwordEncoder;
 
 
     @Override
     public PersonaOutputDTO crearPersona(PersonaInputDTO persona){
+        persona.setPassword(passwordEncoder.encode(persona.getPassword()));
         compruebaCampos(persona);
         Persona p = new Persona(persona);
         personaRepository.save(p);
@@ -51,7 +56,9 @@ public class PersonaServiceImpl implements PersonaService {
             if(persona.getUsuario().length()>10){throw new UnprocessableEntityException("Longitud usuario no puede ser superior a 10");}
             if(persona.getUsuario().length()<6){throw new UnprocessableEntityException("Longitud de usuario no puede ser inferior a 6");}
         }
-        if(persona.getPassword()!=null){p.setPassword(persona.getPassword());}
+        if(persona.getPassword()!=null){
+            p.setPassword(passwordEncoder.encode(persona.getPassword()));
+        }
         if(persona.getName()!=null){p.setName(persona.getName());}
         if(persona.getCompany_email()!=null){p.setCompany_email(persona.getCompany_email());}
         if(persona.getPersonal_email()!=null){p.setPersonal_email(persona.getPersonal_email());}
@@ -148,5 +155,6 @@ public class PersonaServiceImpl implements PersonaService {
         if(p.getCity()==null){throw new UnprocessableEntityException("City no puede ser nulo");}
         if(p.getActive()==null){throw new UnprocessableEntityException("Campo active no puede ser nulo");}
         if(p.getCreated_date()==null){throw new UnprocessableEntityException("Created_date no puede ser nulo");}
+        if(p.getAdmin()==null){throw new UnprocessableEntityException("Admin no puede ser nulo");}
     }
 }

@@ -7,6 +7,7 @@ import java.util.HashMap;
 import java.util.List;
 public interface PersonaRepository extends JpaRepository<Persona,Integer> {
     List<Persona> findByName(String name);
+    Persona findFirstByUsuario(String username);
     public List<Persona> getData(HashMap<String,Object> condiciones,int numPage,int pageSize);
 
 

@@ -1,0 +1,217 @@
+{
+	"info": {
+		"_postman_id": "fb8ccedd-a0e3-4865-8f8e-fc6e871e4109",
+		"name": "Seguridad",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "23389055"
+	},
+	"item": [
+		{
+			"name": "CrearAdmin",
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"usuario\":\"Juanes\",\r\n    \"name\":\"Juan\",\r\n    \"surname\":\"Lopez\",\r\n    \"password\":\"aaa\",\r\n    \"company_email\":\"juan@bosonit.com\",\r\n    \"personal_email\":\"juan@gmail.com\",\r\n    \"city\":\"Caceres\",\r\n    \"active\":true,\r\n    \"created_date\":\"2001-12-27\",\r\n    \"imagen_url\":\"ss.com\",\r\n    \"termination_date\":\"2003-11-23\",\r\n    \"admin\":true\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8080/persona",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"persona"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "LoginAdmin",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8080/login?username=Juanes&password=guitarra23",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"login"
+					],
+					"query": [
+						{
+							"key": "username",
+							"value": "Juanes"
+						},
+						{
+							"key": "password",
+							"value": "aaa",
+							"disabled": true
+						},
+						{
+							"key": "password",
+							"value": "guitarra23"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "CrearNoAdmin",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJKdWFuZXMiLCJyb2xlcyI6WyJST0xFX0FETUlOIiwiUk9MRV9VU0VSIl0sImlhdCI6MTY2NjYzMDYyNCwiZXhwIjoxNjY2NjMxMjI0fQ.prK6Tek6FoPnVVnIwi6bBuUTu3JTIBH1_Da7Bwb6EmIP54Kqy2fkSEDwUzheUU5JLHYCunruZjCFWoanhIhv3g",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"usuario\":\"Juanes2\",\r\n    \"name\":\"Manuel\",\r\n    \"surname\":\"Perez\",\r\n    \"password\":\"aaa\",\r\n    \"company_email\":\"asdasdasd\",\r\n    \"personal_email\":\"asdasdasd2\",\r\n    \"city\":\"Madrid\",\r\n    \"active\":true,\r\n    \"created_date\":\"2001-12-27\",\r\n    \"imagen_url\":\"asdasdasd.com\",\r\n    \"termination_date\":\"2003-11-23\",\r\n    \"admin\":false\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8080/persona",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"persona"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "LoginNoAdmin",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8080/login?username=Juanes2&password=aaa",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"login"
+					],
+					"query": [
+						{
+							"key": "username",
+							"value": "Juanes2"
+						},
+						{
+							"key": "password",
+							"value": "aaa"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "actualizarPersona",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJKdWFuZXMiLCJyb2xlcyI6WyJST0xFX0FETUlOIiwiUk9MRV9VU0VSIl0sImlhdCI6MTY2NjYzMjM4MywiZXhwIjoxNjY2NjMyOTgzfQ.Ikh8LLL5U5KD1yGigi0kZo8h7Di_PRANSy12pPHMHPCRCZTlBpKIZV40dsVPT9tUj0YBXAapUabxLkGbkanrGQ",
+							"type": "string"
+						}
+					]
+				},
+				"method": "PUT",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"usuario\":\"Miguel45\",\r\n    \"password\":\"guitarra23\",\r\n    \"name\":\"Miguel\",\r\n    \"surname\":\"Marcos\",\r\n    \"company_email\":\"dasdasdas\",\r\n    \"termination_date\":\"2002-11-21\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8080/persona/1",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"persona",
+						"1"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "obtenerPersona",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJKdWFuZXMyIiwicm9sZXMiOlsiUk9MRV9VU0VSIl0sImlhdCI6MTY2NjYzMDY1NCwiZXhwIjoxNjY2NjMxMjU0fQ.xgKbNf2d_d2dUXlDoIcJ2NsAYILt5D9ct-ivwTX8kEgndd2SDXkUW1gVRj7W71X_pkPx7Owl15XBIkW9n8FBjw",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8080/persona/1?outputType=simple",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"persona",
+						"1"
+					],
+					"query": [
+						{
+							"key": "outputType",
+							"value": "simple"
+						}
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}

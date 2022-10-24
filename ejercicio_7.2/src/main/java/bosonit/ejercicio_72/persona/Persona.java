@@ -14,7 +14,7 @@ import java.util.Date;
 @Entity
 @Table
 @NoArgsConstructor
-public class Persona implements java.io.Serializable{
+public class Persona implements java.io.Serializable {
     @Id
     @GeneratedValue
     private Integer id_persona;
@@ -39,6 +39,8 @@ public class Persona implements java.io.Serializable{
     @Column
     private String imagen_url;
     @Column
+    private Boolean admin;
+    @Column
     private Date termination_date;
     @OneToOne(fetch = FetchType.LAZY,mappedBy = "persona")
     @JsonBackReference(value = "personaStudent")
@@ -59,6 +61,6 @@ public class Persona implements java.io.Serializable{
         this.created_date = p.getCreated_date();
         this.imagen_url = p.getImagen_url();
         this.termination_date = p.getTermination_date();
+        this.admin=p.getAdmin();
     }
-
 }

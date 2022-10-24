@@ -1,0 +1,12 @@
+<component name="ProjectRunConfigurationManager">
+  <configuration default="false" name="Security2" type="Application" factoryName="Application">
+    <envs>
+      <env name="–spring.profiles.active" value="security2" />
+    </envs>
+    <option name="MAIN_CLASS_NAME" value="bosonit.ejercicio_72.Application" />
+    <module name="ejercicio_7.2" />
+    <method v="2">
+      <option name="Make" enabled="true" />
+    </method>
+  </configuration>
+</component>

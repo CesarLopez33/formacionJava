@@ -5,7 +5,7 @@ import org.springframework.context.annotation.Profile;
 import org.springframework.context.annotation.PropertySource;
 
 @Configuration
-@PropertySource("classpath:local.properties")
-@Profile("local")
-public class PropertiesSourceLocal {
+@PropertySource("classpath:security.properties")
+@Profile({"security","security2"})
+public class PropertiesSourceSecurity {
 }
