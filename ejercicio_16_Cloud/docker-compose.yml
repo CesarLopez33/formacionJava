@@ -1,0 +1,53 @@
+version: "3.2" #Version de Docker compose que estamos utilizando
+services:
+  gateway:
+    container_name: gateway
+    build: ./ejercicio_16_gateway
+    networks:
+      - internal_network
+    ports:
+      - "8080:8080"
+  eureka:
+    container_name: eureka
+    build: ./ejercicio_16_eureka
+    networks:
+      - internal_network
+  back:
+    container_name: back
+    build: ./ejercicio_16_Back
+    networks:
+      - internal_network
+      - back_network
+  front:
+    container_name: front
+    build: ./ejercicio_16_FrontBack
+    networks:
+      - internal_network
+      - front_network
+
+  postgres_back:
+    container_name: postgres_back
+    image: postgres
+    networks:
+      - back_network
+    environment:
+      POSTGRES_USER : postgres
+      POSTGRES_PASSWORD : contrasena
+  postgres_front:
+    container_name: postgres_front
+    image: postgres
+    networks:
+      - front_network
+    environment:
+      POSTGRES_USER : postgres
+      POSTGRES_PASSWORD : contrasena
+
+
+networks:
+  internal_network:
+    name: internal_network
+  back_network:
+    name: back_network
+  front_network:
+    name: front_network
+

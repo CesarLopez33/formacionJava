@@ -4,9 +4,11 @@ import bosonit.ejercicio_72.student.Student;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import java.io.Serializable;
+
 @Data
 @NoArgsConstructor
-public class StudentOutputDTO {
+public class StudentOutputDTO implements Serializable {
     private String id_student;
     private Integer id_persona;
     private Integer num_hours_week;

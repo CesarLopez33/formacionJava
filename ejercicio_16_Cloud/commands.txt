@@ -1,0 +1,7 @@
+//Base de datos para el back
+docker run --name cloud_back_db -p 5432:5432 -d -e POSTGRES_PASSWORD=contrasena postgres
+docker start cloud_back_db
+
+//Base de datos para el front-back
+docker run --name cloud_front_db -p 3306:3306 -d -e MYSQL_ROOT_PASSWORD=micontrasena -e MYSQL_DATABASE=mysql -e MYSQL_USER=mysql -e MYSQL_PASSWORD=contrasena mysql
+docker start cloud_front_db

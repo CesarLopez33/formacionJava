@@ -53,11 +53,11 @@ class ObtenerPersonaConTodoTests {
         //Creo dos personas(profesor-1/estudiante-2)
         Persona persona1 = new Persona(new PersonaInputDTO("Juanes", "Manuel", "Perez",
                 "aaa", "asdasdasd", "asdasdasd2", "Madrid", true,
-                new Date(2001-12-27), "asdasdasd.com", new Date(2003-11-23)
+                new Date(2001-12-27), "asdasdasd.com", new Date(2003-11-23),true
         ));
         Persona persona2 = new Persona(new PersonaInputDTO("Juanes", "Manuel", "Juan",
                 "aaa", "asdasdasd", "asdasdasd2", "Madrid", true,
-                new Date(2001-12-27), "asdasdasd.com", new Date(2003-11-23)
+                new Date(2001-12-27), "asdasdasd.com", new Date(2003-11-23),false
         ));
         persona1 = personaRepository.save(persona1);
         persona2 = personaRepository.save(persona2);

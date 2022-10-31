@@ -44,12 +44,12 @@ class CrearStudentTest {
     void init(){
         Persona persona = new Persona(new PersonaInputDTO("Juanes", "Manuel", "Perez",
                 "aaa", "asdasdasd", "asdasdasd2", "Madrid", true,
-                new Date(2001-12-27), "asdasdasd.com", new Date(2003-11-23)
+                new Date(2001-12-27), "asdasdasd.com", new Date(2003-11-23),true
         ));
         persona = personaRepository.save(persona);
         Persona persona2 = new Persona(new PersonaInputDTO("Juanes", "Manuel", "Perez",
                 "aaa", "asdasdasd", "asdasdasd2", "Madrid", true,
-                new Date(2001-12-27), "asdasdasd.com", new Date(2003-11-23)
+                new Date(2001-12-27), "asdasdasd.com", new Date(2003-11-23),false
         ));
         personaRepository.save(persona2);
 
@@ -62,7 +62,7 @@ class CrearStudentTest {
 
     @Test
     void crearStudentTest() throws URISyntaxException {
-        final String baseUrl = "http://localhost:"+randomServerPort+"/student/";
+        final String baseUrl = "http://localhost:"+randomServerPort+"/student";
         URI uri = new URI(baseUrl);
         StudentInputDTO student = new StudentInputDTO(
                 2,10,"Nada", "1", "Back");

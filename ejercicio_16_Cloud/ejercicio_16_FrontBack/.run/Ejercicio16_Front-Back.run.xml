@@ -1,0 +1,9 @@
+<component name="ProjectRunConfigurationManager">
+  <configuration default="false" name="Ejercicio16_Front-Back" type="Application" factoryName="Application">
+    <option name="MAIN_CLASS_NAME" value="bosonit.ejercicio_16_FrontBack.Ejercicio16FrontBackApplication" />
+    <module name="ejercicio_16_FrontBack" />
+    <method v="2">
+      <option name="Make" enabled="true" />
+    </method>
+  </configuration>
+</component>

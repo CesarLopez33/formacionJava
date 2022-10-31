@@ -41,8 +41,7 @@ public class StudentserviceImpl implements StudentService {
         }else throw new UnprocessableEntityException("La persona con id "+student.getId_persona()+" ya esta asignada");
         s.setProfesor(profesorRepository.findById(student.getId_profesor()).orElseThrow(()->
                 new EntityNotFoundException("No se ha encontrado profesor con id "+ student.getId_profesor())));
-        studentRepository.save(s);
-        return new StudentOutputDTO(s);
+        return new StudentOutputDTO(studentRepository.save(s));
     }
 
     @Override

@@ -2,6 +2,7 @@ package bosonit.ejercicio_72.persona.service;
 
 import bosonit.ejercicio_72.persona.Persona;
 import bosonit.ejercicio_72.exceptions.UnprocessableEntityException;
+
 import bosonit.ejercicio_72.persona.dtos.PersonaInputDTO;
 import bosonit.ejercicio_72.persona.dtos.PersonaOutputDTO;
 import bosonit.ejercicio_72.persona.dtos.PersonaProfesorFullOutputDTO;
@@ -11,7 +12,7 @@ import bosonit.ejercicio_72.profesor.Profesor;
 import bosonit.ejercicio_72.profesor.repository.ProfesorRepository;
 import bosonit.ejercicio_72.student.Student;
 import bosonit.ejercicio_72.student.repository.StudentRepository;
-import lombok.AllArgsConstructor;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.http.HttpStatus;
@@ -39,8 +40,8 @@ public class PersonaServiceImpl implements PersonaService {
 
     @Override
     public PersonaOutputDTO crearPersona(PersonaInputDTO persona){
-        persona.setPassword(passwordEncoder.encode(persona.getPassword()));
         compruebaCampos(persona);
+        persona.setPassword(passwordEncoder.encode(persona.getPassword()));
         Persona p = new Persona(persona);
         personaRepository.save(p);
         return new PersonaOutputDTO(p);

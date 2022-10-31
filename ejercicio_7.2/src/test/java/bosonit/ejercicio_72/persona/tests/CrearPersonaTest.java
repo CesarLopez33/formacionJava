@@ -42,7 +42,8 @@ class CrearPersonaTest {
                 true,
                 new Date(2001-12-27),
                 "asdasdasd.com",
-                new Date(2003-11-23));
+                new Date(2003-11-23),
+                true);
 
         HttpHeaders headers = new HttpHeaders();
         HttpEntity<PersonaInputDTO> request = new HttpEntity<>(persona,headers);

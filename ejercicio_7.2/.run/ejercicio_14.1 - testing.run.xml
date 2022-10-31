@@ -13,16 +13,14 @@
               <option value="clean" />
               <option value="verify" />
               <option value="sonar:sonar" />
-              <option value="-Dsonar.projectKey=ejercicio14.1" />
+              <option value="-Dsonar.projectKey=Crud-validacion" />
               <option value="-Dsonar.host.url=http://localhost:9000" />
-              <option value="-Dsonar.login=sqp_f4d505f16f2987d057369c8209fc5e6b307153a1" />
+              <option value="-Dsonar.login=sqp_7f1c07e3d8e8bc485c8c9bfa83fa48ca35dc11d7" />
             </list>
           </option>
           <option name="pomFileName" />
           <option name="profilesMap">
-            <map>
-              <entry key="test" value="true" />
-            </map>
+            <map />
           </option>
           <option name="resolveToWorkspace" value="false" />
           <option name="workingDirPath" value="$PROJECT_DIR$" />
